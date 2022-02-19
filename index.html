@@ -19,7 +19,7 @@
                     console.log('users initialized');
                     DBRepository.seedEvents(function(eventSeedSuccess){
                       console.log('events initialized');
-                      DBRepository.SeedEventParticipations(function(eventParticipationSuccess){
+                      DBRepository.seedEventParticipations(function(eventParticipationSuccess){
                         console.log('eventParticipations initialized');
 
                       });
@@ -37,7 +37,7 @@
 
 
                 } else {
-                  document.getElementById('#maintitle').innerHTML = "Une erreure s'est produite ! Réessayer plus tard";
+                  document.getElementById('maintitle').innerHTML = "Une erreure s'est produite ! Réessayer plus tard";
                 }
                 
               });

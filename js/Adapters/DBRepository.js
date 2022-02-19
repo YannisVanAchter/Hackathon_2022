@@ -93,11 +93,12 @@ class DBRepository{
 
     let cpt = 0;
     user_data.forEach(user_item => {
-      this.addUser({fullname : user_item.fullname, email: user_item.email, password: user_item.password, imagepath: user_item.avatar_filename, user_id: user_item.user_id}, function(){ });
-      cpt++;
-      if(cpt > user_data.length){
-        callback(true);
-      }
+      this.addUser({fullname : user_item.fullname, email: user_item.email, password: user_item.password, imagepath: user_item.avatar_filename, user_id: user_item.user_id}, function(){ 
+        cpt++;
+        if(cpt >= user_data.length){
+          callback(true);
+        }
+      });
     });
   }
 
@@ -108,11 +109,13 @@ class DBRepository{
 
     let cpt = 0;
     event_data.forEach(event_item => {
-      this.addEvent({title: event_item.title, begindate: event_time.begindate, endingdate: event_time.endingdate, location: event_item.location, description: event_item.description, category: event_item.category, type: event_item.category_type, event_id : event_item.event_id}, function(){ });
-      cpt++;
-      if(cpt > event_data.length){
-        callback(true);
-      }
+      this.addEvent({title: event_item.title, begindate: event_item.begindate, endingdate: event_item.endingdate, location: event_item.location, description: event_item.description, category: event_item.category, type: event_item.category_type, event_id : event_item.event_id}, function(){
+        cpt++;
+        if(cpt >= event_data.length){
+          callback(true);
+        }
+      });
+
     });
   }
 
@@ -123,11 +126,13 @@ class DBRepository{
 
     let cpt = 0;
     event_participation_data.forEach(event_participation_item => {
-      this.addEventParticipation({user_id: event_participation_item.user_id, event_id: event_participation_item.event_id, eventparticipation_id: event_participation_item.eventparticipation_id}, function(){ });
-      cpt++;
-      if(cpt > event_participation_data.length){
-        callback(true);
-      }
+      this.addEventParticipation({user_id: event_participation_item.user_id, event_id: event_participation_item.event_id, eventparticipation_id: event_participation_item.eventparticipation_id}, function(){
+        cpt++;
+        if(cpt >= event_participation_data.length){
+          callback(true);
+        }
+      });
+
     });
   }
 
@@ -185,6 +190,8 @@ class DBRepository{
       objectStoreRequest.onsuccess = function(event) {
         // report the success of our request
         //console.log("success objectsotre");
+        callback(true);
+        db.close();
       };
     };
     
@@ -247,6 +254,9 @@ class DBRepository{
       objectStoreRequest.onsuccess = function(event) {
         // report the success of our request
         //console.log("success objectsotre");
+        console.log("success");
+        callback(true);
+        db.close();
       };
     };
   }
@@ -294,9 +304,10 @@ class DBRepository{
       objectStoreRequest.onsuccess = function(event) {
         // report the success of our request
         //console.log("success objectsotre");
+        callback(true);
+        db.close();
       };
 
-      db.close();
     };
   }
 
