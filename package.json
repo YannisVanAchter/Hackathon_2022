@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "jQuery": "^1.7.4"
+    "jQuery": "^1.7.4",
+    "run": "^1.4.0"
   }
 }
