@@ -1,4 +1,4 @@
-class Event(){
+class Event{
   constructor(_title, _begindate, _endingdate, _location, _description, _category, _category_type, _event_id){
     this.title = _title;
     this.begindate = _begindate;
