@@ -1,0 +1,49 @@
+
+
+		/* -------------   Header ( & logo)   -------- */
+		/* -------------   Pages : login, profil_page   -------- */
+		.header {
+			text-align: center;
+			padding: 0px 0px;
+			margin: 1px 0;
+			background-color: #ccffcc;
+		}
+		.logo {
+			float: center;
+			border: 1px;
+			border-color: white;
+			width:180px;
+			height:180px;
+			border-radius: 20%;
+		}
+		.imgcontainer {
+		  text-align: center;
+		  margin: 20px 0 20px 0;
+		}
+		.avatar {
+		  width: 20%;
+		  height: 20%;
+		  border-radius: 40%;
+		}
+		/* -------------   FOOTER   -------- */
+		/* -------------   Pages : login, profil_page   -------- */
+		.row {
+			/*border: 2px solid yellow;*/
+			padding: 1px;
+			margin: 1px;
+			height: 10%;
+		}
+		.col-sm {
+			border: 2px solid gray;
+			padding: 1px;
+			margin: 1px;
+			height: 10%;
+		}
+		.trow {
+			text-align: center;
+			padding: 2px;
+			margin: 2px;
+		}
+		.mt-5 {
+
+		}
