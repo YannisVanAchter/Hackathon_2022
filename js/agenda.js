@@ -9,7 +9,7 @@ const week = [
     "Dimanche"
 ];
 
-let today = new Date()
+const today = new Date()
 
 function getMonday(d) {
     d = new Date(d);
@@ -25,15 +25,11 @@ function getSunday(d) {
     return new Date(d.setDate(diff));
 }
 
-var headCalendar = "Semaine du " + getMonday(today) + " au " + getSunday(today);
+current = today; // ????
+
+var headCalendar = "Semaine du " + getMonday(current) + " au " + getSunday(current);
 
 var weekCalendar = {
-    var dayNb = 
-    while(dayNb < 7) {
-
-        // print ?? + event (with hour)
-        day = week(dayNb);
-        dayNb++;
-    }
+    
 }
 
