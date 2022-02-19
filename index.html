@@ -10,8 +10,13 @@
             console.log('This browser doesn\'t support IndexedDB');
             return;
           } else {
-            const _dbRepository = new DBRepository();
-            //window.location.href = "./views/login.html";
+            DBRepository.init(function(success){
+              if(success){
+                //window.location.href = "./views/login.html";
+              } else {
+                $('#maintitle').html("Une erreure s'est produite ! Réessayer plus tard");
+              }
+            });
           }
         })();
         
@@ -19,6 +24,6 @@
       <!--<meta http-equiv="refresh" content="0; url=./views/login.html" />-->
     </head>
     <body>
-        <h1> Nous chargeons le site, un peu de patience ! </h1>
+        <h1 id="maintitle"> Nous chargeons le site, un peu de patience ! </h1>
     </body>
 </html>
