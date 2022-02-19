@@ -6,10 +6,9 @@
     z-index: 1;
     top: 0;
     right: 0;
-    background-color: aliceblue;
-    overflow-x: hidden;
-    padding-top: 20px;
+    background-color:#111;
     transition: 0.5s;
+    padding-top: 20px;
 }
 
 /* When you mouse over the navigation links, change their color
