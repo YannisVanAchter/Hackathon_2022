@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Ajout Event</title>
+    </head>
+    <body>
+        <p>Entrer le titre de l'évenement: </p>
+        <input></input type="text" id="title" maxlength="60">
+        <p>Entrer le lieux de l'évenement: </p>
+        <input></input type="address" id="place">
+        <p>Entrer le date de début de l'évenement: </p>
+        <input></input type="datetime" id="beginDate">
+        <p>Entrer le date de fin de l'évenement: </p>
+        <input></input type="date" id="endDate">
+        <p>Entrer le catégorie de l'évenement : </p>
+          <select name="Catégorie" id="category">
+              <optgroup label="Activité sportive">
+                <option>Piscine</option>
+                <option>Randonées</option>
+                <option>Zumba</option>
+              </optgroup>
+              <optgroup label="Activité culturelle">
+              <option>Théatres</option>
+              <option>Exposition</option>
+              <option>Visite de villes</option>
+            </optgroup>
+            <optgroup label="Activité intélectuelles">
+                <option>Painture</option>
+                <option>Scrable</option>
+                <option>Echec</option>
+              </optgroup>
+          </select>
+        <p>Entrer la description de l'évenement (facultatif).</p>
+        <input></input type="text" id="description" maxlength="150"><p>
+        <button type="button" class="subeventbutton">Partagé mon évènement!</button></p>
+
+        <script src="./test.js"></script>
+
+    </body>
+</html>
