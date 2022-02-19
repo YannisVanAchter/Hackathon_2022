@@ -22,10 +22,6 @@ class SetNewEvent {
     }
 }
 
-document.querySelector(".subeventbutton").addEventListener("click", function (event) {
-    console.log(event)
-})
-
 function SubmitEvent(event){
     new SetNewEvent('Hello' , new Date("2022-04-15") , 
 new Date("2022-04-16"), "Jeux Scrable" ,'Av. Sergent Vrithoff 2, 5000 Namur' , 'Jeu de scrable chez Marilène');
@@ -43,3 +39,19 @@ new Date("2022-04-16"), "Jeux Scrable" ,'Av. Sergent Vrithoff 2, 5000 Namur' , '
 // alert(myObject.beginDate);
 // alert(myObject.endDate);
 
+const form = document.getElementById('test-form');
+const message = document.querySelector('.message');
+
+function interceptForm(event) {
+    event.preventDefault();
+
+    const title = form[0].value;
+    const location = form[1].value;
+    const beginDate = form[2].value;
+
+    console.log(title);
+
+    message.innerHTML = title;
+}
+
+form.addEventListener('submit', interceptForm);
