@@ -3,18 +3,45 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
-}
-
-html {
-  font-size: 62.5%;
+  transition: all 0.4s ease;
 }
 
 .calendar {
-  width: 20%;
+  width: 50%;
   height: 100%;
-  background-color:#eee;
-  color: #12121f;
+  background-color:#222227;
+  color: #eee;
   display: flex;
   justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  overflow-x: hidden;
+}
+
+.headCalendar {
+  width: 100%;
+  height: 12rem;
+  background-color: #167e56;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  text-align: center;
+  text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+.headCalendar i {
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.weekList {
+  width: 100%;
+  height: 5rem;
+  padding: 0 0.4rem;
+  display: flex;
   align-items: center;
 }
