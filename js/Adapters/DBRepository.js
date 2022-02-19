@@ -55,15 +55,15 @@ class DBRepository{
         let userObjectStore = db.createObjectStore("users", {keyPath: 'user_id'});
         userObjectStore.createIndex("name", "name", { unique: false });
         userObjectStore.createIndex("email", "email", { unique: true });
-        console.log("created user store");
+        // console.log("created user store");
 
         // Events
         db.createObjectStore("events", {keyPath: 'event_id'});
-        console.log("created event store");
+        // console.log("created event store");
 
         // Event participations
         db.createObjectStore("eventparticipations", {keyPath: 'eventparticipation_id'});
-        console.log("created eventparticipation store");
+        // console.log("created eventparticipation store");
 
         callback(true);
       }
@@ -137,16 +137,16 @@ class DBRepository{
     }
     var req = indexedDB.deleteDatabase(DBRepository.getDBName());
     req.onsuccess = function () {
-        console.log("Deleted database successfully");
-        callback(true);
+        // console.log("Deleted database successfully");
+        // callback(true);
     };
     req.onerror = function () {
-        console.log("Couldn't delete database");
-        callback(false);
+        // console.log("Couldn't delete database");
+        // callback(false);
     };
     req.onblocked = function () {
-        console.log("Couldn't delete database due to the operation being blocked");
-        callback(false);
+        // console.log("Couldn't delete database due to the operation being blocked");
+        // callback(false);
     };
   }
 
@@ -156,7 +156,8 @@ class DBRepository{
     if(typeof userObject.user_id === 'undefined' || userObject.user_id === null){
       userObject.user_id = Random.getRandomInt(6700);
     }
-    let userObject_data = {user_id: userObject.user_id, fullname: userObject.fullname, email: userObject.email, password: userObject.password, avatar_filename: userObject.imagepath}
+    let userObject_data = {user_id: userObject.user_id, fullname: userObject.fullname, email: userObject.email,
+       password: userObject.password, avatar_filename: userObject.imagepath}
     let DBOpenRequest = window.indexedDB.open(DBRepository.getDBName(), 4);
     DBOpenRequest.onsuccess = function(event) {
       //console.log("Database Opened");
@@ -251,10 +252,44 @@ class DBRepository{
     };
   }
 
-  static getEvent(event_id, callback) {
+  static getEvent(event_id, callback) { 
+    if(typeof event_id === 'undefined' || event_id === null){
+      event_id.user_id = Random.getRandomInt(6700);
+    }
+    let eventObject_data = {title: event_id.title, begindate: event_id.begindate, 
+      endingdate: event_id.endingdate, location: event_id.location, description: event_id.description, 
+      category: event_id.category, type: event_id.category_type, event_id : event_id.event_id}
+    let DBOpenRequest = window.indexedDB.open(DBRepository.getDBName(), 4);
+    DBOpenRequest.onsuccess = function(event) {
+    console.log("Database Opened");
+    
+      // store the result of opening the database in the db variable.
+      // This is used a lot below
+      let db = DBOpenRequest.result;
 
+      let transaction = db.transaction(["events"], "readwrite");
+
+      // report on the success of the transaction completing, when everything is done
+      transaction.oncomplete = function(event) {
+        console.log("transaction complete");
+      };
+
+      transaction.onerror = function(event) {
+        console.log("error occured");
+      };
+
+      // create an object store on the transaction
+      let objectStore = transaction.objectStore("events");
+
+      // Make a request to add our newItem object to the object store
+      let objectStoreRequest = objectStore.get(eventObject_data);
+
+      objectStoreRequest.onsuccess = function(event) {
+        // report the success of our request
+        console.log("success objectsotre.get()");
+      };
+    };
   }
-
   static getAllEvents(callback){
 
   }
@@ -288,7 +323,7 @@ class DBRepository{
       // create an object store on the transaction
       let objectStore = transaction.objectStore("eventparticipations");
 
-      // Make a request to add our newItem object to the object store
+      // Make a request to get our newItem object from the object store
       let objectStoreRequest = objectStore.add(eventParticipationObject_data);
 
       objectStoreRequest.onsuccess = function(event) {
