@@ -93,11 +93,12 @@ class DBRepository{
 
     let cpt = 0;
     user_data.forEach(user_item => {
-      this.addUser({fullname : user_item.fullname, email: user_item.email, password: user_item.password, imagepath: user_item.avatar_filename, user_id: user_item.user_id}, function(){ });
-      cpt++;
-      if(cpt > user_data.length){
-        callback(true);
-      }
+      this.addUser({fullname : user_item.fullname, email: user_item.email, password: user_item.password, imagepath: user_item.avatar_filename, user_id: user_item.user_id}, function(){ 
+        cpt++;
+        if(cpt >= user_data.length){
+          callback(true);
+        }
+      });
     });
   }
 
@@ -108,11 +109,13 @@ class DBRepository{
 
     let cpt = 0;
     event_data.forEach(event_item => {
-      this.addEvent({title: event_item.title, begindate: event_time.begindate, endingdate: event_time.endingdate, location: event_item.location, description: event_item.description, category: event_item.category, type: event_item.category_type, event_id : event_item.event_id}, function(){ });
-      cpt++;
-      if(cpt > event_data.length){
-        callback(true);
-      }
+      this.addEvent({title: event_item.title, begindate: event_item.begindate, endingdate: event_item.endingdate, location: event_item.location, description: event_item.description, category: event_item.category, type: event_item.category_type, event_id : event_item.event_id}, function(){
+        cpt++;
+        if(cpt >= event_data.length){
+          callback(true);
+        }
+      });
+
     });
   }
 
@@ -123,11 +126,13 @@ class DBRepository{
 
     let cpt = 0;
     event_participation_data.forEach(event_participation_item => {
-      this.addEventParticipation({user_id: event_participation_item.user_id, event_id: event_participation_item.event_id, eventparticipation_id: event_participation_item.eventparticipation_id}, function(){ });
-      cpt++;
-      if(cpt > event_participation_data.length){
-        callback(true);
-      }
+      this.addEventParticipation({user_id: event_participation_item.user_id, event_id: event_participation_item.event_id, eventparticipation_id: event_participation_item.eventparticipation_id}, function(){
+        cpt++;
+        if(cpt >= event_participation_data.length){
+          callback(true);
+        }
+      });
+
     });
   }
 
@@ -186,31 +191,86 @@ class DBRepository{
       objectStoreRequest.onsuccess = function(event) {
         // report the success of our request
         //console.log("success objectsotre");
+        callback(true);
+        db.close();
       };
     };
     
   }
 
   static getUser(user_id, callback){
-    //var request = indexedDB.open(DBRepository.getDBName(), 2);
-  //
-    //request.onerror = event => {
-    //  console.log("Couldn't open db " + event.target.result);
-    //  callback(false);
-    //};
-    //request.onupgradeneeded = event => {
-    //  var db = event.target.result;
-    //
-    //  db.transaction("users").objectStore("users").get(user_id).onsuccess = event => {
-    //    const resultObject = event.target.result;
-    //    callback(new User(resultObject.fullname, resultObject.email, resultObject.password, resultObject.imagepath, resultObject.user_id));
-    //  };
-    //};
+    let DBOpenRequest = window.indexedDB.open(DBRepository.getDBName(), 4);
+    DBOpenRequest.onsuccess = function(event) {
+      //console.log("Database Opened");
+    
+      // store the result of opening the database in the db variable.
+      // This is used a lot below
+      let db = DBOpenRequest.result;
+
+      let transaction = db.transaction(["users"], "readwrite");
+
+      // report on the success of the transaction completing, when everything is done
+      transaction.oncomplete = function(event) {
+        //console.log("transaction complete");
+      };
+
+      transaction.onerror = function(event) {
+        //console.log("error occured");
+      };
+
+      // create an object store on the transaction
+      let objectStore = transaction.objectStore("users");
+
+      // Make a request to add our newItem object to the object store
+      let objectStoreRequest = objectStore.get(user_id);
+
+      objectStoreRequest.onsuccess = function(event) {
+        // report the success of our request
+        //console.log("success objectsotre");
+        callback(event.target.result);
+        db.close();
+      };
+    };
 
   }
   
   static doesLoginExist(email, callback) {
+    let DBOpenRequest = window.indexedDB.open(DBRepository.getDBName(), 4);
+    DBOpenRequest.onsuccess = function(event) {
+      //console.log("Database Opened");
+    
+      // store the result of opening the database in the db variable.
+      // This is used a lot below
+      let db = DBOpenRequest.result;
 
+      let transaction = db.transaction(["users"], "readwrite");
+
+      // report on the success of the transaction completing, when everything is done
+      transaction.oncomplete = function(event) {
+        //console.log("transaction complete");
+      };
+
+      transaction.onerror = function(event) {
+        //console.log("error occured");
+      };
+
+      // create an object store on the transaction
+      let objectStore = transaction.objectStore("users");
+
+      // Make a request to add our newItem object to the object store
+      let objectStoreRequest = objectStore.get(email);
+
+      objectStoreRequest.onsuccess = function(event) {
+        // report the success of our request
+        //console.log("success objectsotre");
+        callback(true);
+        db.close();
+      };
+      objectStoreRequest.onerror = function(event){
+        callback(false);
+        db.close();
+      }
+    };
   }
 
 
@@ -248,6 +308,9 @@ class DBRepository{
       objectStoreRequest.onsuccess = function(event) {
         // report the success of our request
         //console.log("success objectsotre");
+        console.log("success");
+        callback(true);
+        db.close();
       };
     };
   }
@@ -294,7 +357,6 @@ class DBRepository{
 
   }
 
-
   //  =========== EVENT PARTICIPATION =============================
   static addEventParticipation(addEventParticipationObject, callback) {
     if(typeof addEventParticipationObject.eventparticipation_id === 'undefined' || addEventParticipationObject.eventparticipation_id === null){
@@ -329,9 +391,10 @@ class DBRepository{
       objectStoreRequest.onsuccess = function(event) {
         // report the success of our request
         //console.log("success objectsotre");
+        callback(true);
+        db.close();
       };
 
-      db.close();
     };
   }
 
