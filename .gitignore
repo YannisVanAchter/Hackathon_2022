@@ -23,6 +23,7 @@ gen/
 *.exe
 *.o
 *.so
+*.lun
 
 # Packages #
 ############
