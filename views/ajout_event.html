@@ -5,17 +5,17 @@
         <title>Ajout Event</title>
     </head>
     <body>
-        <form action="/example" method="POST" id="test-form">
+        <form action="/example" method="POST" id="test-form"> 
             <p>Entrer le titre de l'évenement: </p>
             <input></input type="text" id="title" maxlength="60">
             <p>Entrer le lieux de l'évenement: </p>
             <input></input type="address" id="location">
             <p>Entrer le date de début de l'évenement: </p>
-            <input></input type="datetime" id="beginDate">
+            <input type="date" id="date-picker" value="aaaa-mm-jj"></input>
             <p>Entrer le date de fin de l'évenement: </p>
-            <input></input type="date" id="endDate">
+            <input type="date" id="endDate" value="aaaa-mm-jj"></input>
             <p>Entrer le catégorie de l'évenement : </p>
-            <select name="Catégorie" id="category">
+            <select name="Catégorie" id="category" value="Activitée">
                 <optgroup label="Activité sportive">
                     <option>Piscine</option>
                     <option>Randonées</option>
@@ -33,16 +33,14 @@
                 </optgroup>
             </select>
             <p>Entrer la description de l'évenement (facultatif).</p>
-            <input type="text" id="description" maxlength="150" /><p>
-            <input type="submit">Partager mon évènement!</input></p>
+            <input type="text" id="description" maxlength="150" />
+            <p><button id="submit">Partager mon évènement!</button></p>
 
         </form>
 
-        <hr>
+        <h1 class="message"></h1>
 
-        <h1 class="message">Coucou</h1>
-
-        <script src="./test.js"></script>
+        <script src="../js/Model/AddEvent.js"></script>
 
     </body>
 </html>

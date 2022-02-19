@@ -25,8 +25,6 @@ function getSunday(d) {
     return new Date(d.setDate(diff));
 }
 
-current = today; // ????
-
 var headCalendar = "Semaine du " + getMonday(current) + " au " + getSunday(current);
 
 var weekCalendar = {
