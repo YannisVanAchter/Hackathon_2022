@@ -1,0 +1,37 @@
+
+.sidebar {
+    height: 100%;
+    width: 0; /* change whith JavaScript */
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: aliceblue;
+    overflow-x: hidden;
+    padding-top: 20px;
+    transition: 0.5s;
+}
+
+/* When you mouse over the navigation links, change their color
+.sidebar a:hover {
+    color:
+}
+*/
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color:green;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+.openbtn:hover {
+    background-color:limegreen;
+  }
+
+  #main {
+    transition: margin-left .5s; /* If you want a transition effect */
+    padding: 20px;
+  }
