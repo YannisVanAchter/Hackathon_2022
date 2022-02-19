@@ -3,14 +3,29 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
+body {font-family: Verdana, Roboto, sans-serif;}
+form {border: 4px solid #green;}
 
-input[type=text], input[type=password] {
-  width: 100%;
+.titre {
+	text-align: center;
+	padding: 12px 20px;
+	margin: 8px 0;
+}
+
+.header {
+	text-align: center;
+	padding: 12px 20px;
+	margin: 8px 0;
+	background-color: gray
+	
+}
+
+input[type=email], input[type=password] {
+  width: 60%;
+  
   padding: 12px 20px;
   margin: 8px 0;
-  display: inline-block;
+  display: block ;
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
@@ -22,7 +37,7 @@ button {
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 60%;
 }
 
 button:hover {
@@ -41,12 +56,13 @@ button:hover {
 }
 
 img.avatar {
-  width: 40%;
-  border-radius: 50%;
+  width: 30%;
+  border-radius: 40%;
 }
 
 .container {
-  padding: 16px;
+  padding: 16Spx;
+  
 }
 
 span.psw {
@@ -68,18 +84,31 @@ span.psw {
 </head>
 <body>
 
-<h2>Login Form</h2>
 
+	<header class="header"	>
+		<h2>Logo</h2>
+	</header>
 <form action="/action_page.php" method="post">
+
+
+	<div class="titre">
+	Connectez-vous
+	</div>
+
   <div class="imgcontainer">
     <img src="avatar.png" alt="Avatar" class="avatar">
   </div>
 
-  <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
 
-    <label for="psw"><b>Password</b></label>
+	
+	
+
+
+  <div class="container">
+    <label for="email"><b>Entrez votre adresse e-mail.</b></label>
+    <input type="email" placeholder="henry.dupont@gmail.com" name="email" required>
+	<br />
+    <label for="psw"><b>Entrez votre mot de passe.</b></label>
     <input type="password" placeholder="Enter Password" name="psw" required>
         
     <button type="submit">Login</button>
@@ -90,7 +119,11 @@ span.psw {
 
   <div class="container" style="background-color:#f1f1f1">
     <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
+    <span class="psw">
+	<button type="button" class="cancelbtn">
+	<a href="#">Oubli de votre mot de passe ? </a>
+	</button>
+	</span>
   </div>
 </form>
 
