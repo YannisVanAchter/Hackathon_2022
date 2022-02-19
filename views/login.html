@@ -17,7 +17,7 @@
 	
 
 		<style>
-		body {font-family: Verdana, Roboto, sans-serif;}
+		body {font-family: Roboto, sans-serif; font-size: 22px;}
 		form {border: 4px solid #green;}
 
 		/* -------------   Header et logo   -------- */
@@ -80,7 +80,8 @@
 		}
 
 		img.avatar {
-		  width: 30%;
+		  width: 20%;
+		  height: 20%;
 		  border-radius: 40%;
 		}
 
@@ -92,10 +93,36 @@
 
 		.rstpwd {
 		  width: auto;
-		  padding: 10px 18px;
+		  padding: 5px 5px;
 		  background-color: #f44336;
 		  float: right;
 		  padding-top: 16px;
+		  font-size: 18px;
+		  border-radius: 15px;
+		}
+
+		.row {
+			/*border: 2px solid yellow;*/
+			padding: 1px;
+			margin: 1px;
+			height: 10%;
+		}
+		.col-sm {
+			border: 2px solid gray;
+			padding: 1px;
+			margin: 1px;
+			height: 10%;
+		}
+
+		.trow {
+			text-align: center;
+			padding: 2px;
+			margin: 2px;
+		}
+
+
+		.mt-5 {
+			height: 50%;
 		}
 
 		/* Change styles for span and cancel button on extra small screens */
@@ -108,6 +135,8 @@
 				height: 10%;
 				}
 			}
+
+			
 		</style>
 	</head>
 <body>
@@ -128,7 +157,7 @@
 	
 <!-- **********   AVATAR **********  -->
 	<div class="imgcontainer">
-		<img src="avatar.png" alt="Photo de profil" class="avatar">
+		<img src="../img/avatar.png" alt="Photo de profil" class="avatar">
 	</div>
 
 <!-- **********   LOGIN FIELDS **********  -->
@@ -154,6 +183,49 @@
 
 	  </div>
 	</form>
-
+<!-- --------------------------  FOOTER   -------------------------- -->
+<div class="mt-5 p-4 bg-dark text-white text-center">
+  	<div class="row">
+		<div class="col-sm p-4 bg-primary text-white">
+			<div class="trow">
+				Contact			
+			</div>
+			<div class="row">
+				<div class="col-sm p-3 bg-primary text-white">
+					Téléphone
+					<br />
+					01/234.56.78
+				</div>
+				<div class="col-sm p-3 bg-primary text-white">
+					Siège social
+					<br />
+					Rue de l'espoir 1, 5000 Namur
+				</div>		
+			</div>
+		</div>
+		<div class="col-sm p-5 bg-primary text-white">
+			<div class="row">
+				<div class="col-sm p-3 bg-primary text-white">
+					<button type="button" class="simplebutton">
+						Sitemap
+					</button>
+				</div>
+				<div class="col-sm p-3 bg-primary text-white">
+					<button type="button" class="simplebutton">
+						Conditions d'utilisations
+					</button>
+				</div>
+				<div class="col-sm p-3 bg-primary text-white">
+					<button type="button" class="simplebutton">
+						Politique de vie privée
+					</button>
+				</div>		
+			</div>
+		</div>
+	</div>
+	<div class="trow">
+		The Whovians copyright 2022
+	</div>
+</div>
 </body>
 </html>
