@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<htlml>
+    <head>
+      <title>Proches Et Vous </title>
+      <script src="./js/Adapters/DBRepository.js"></script>
+      <script>
+        (function() {
+          'use strict';
+          if (!('indexedDB' in window)) {
+            console.log('This browser doesn\'t support IndexedDB');
+            return;
+          } else {
+            const _dbRepository = new DBRepository();
+            //window.location.href = "./views/login.html";
+          }
+        })();
+        
+      </script>
+      <!--<meta http-equiv="refresh" content="0; url=./views/login.html" />-->
+    </head>
+    <body>
+        <h1> Nous chargeons le site, un peu de patience ! </h1>
+        <div id="sideAgenda" class="sidebar">
+          <a href="javascript:void(0)" class="closebtn"
+          onclick="closeNav()">&times;</a>
+          <h1></h1>
+        </div>
+        <div id="main">
+          <button class="openbtn" onclick="openNav()">&#9776; Open Sidebar</button>
+          <h2>Collapsed Sidebar</h2>
+          <p>Content...</p>
+        </div>
+    </body>
+</html>
