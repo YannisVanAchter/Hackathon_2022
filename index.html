@@ -31,9 +31,12 @@
                   DBRepository.getUser(1, function(user){
                     console.log(user.fullname)
                   });
-                  //DBRepository.getLastId("users", function(lastID){
-
-                  //});
+                  DBRepository.doesLoginExist('l.lantoine@gmail.co.uk', function(doesExist){
+                    console.log("antoine "+doesExist);
+                  });
+                  DBRepository.doesLoginExist('m.antoinette@gmail.com', function(doesExist){
+                    console.log("marie " + doesExist);
+                  });
 
 
                 } else {

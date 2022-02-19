@@ -198,25 +198,78 @@ class DBRepository{
   }
 
   static getUser(user_id, callback){
-    //var request = indexedDB.open(DBRepository.getDBName(), 2);
-  //
-    //request.onerror = event => {
-    //  console.log("Couldn't open db " + event.target.result);
-    //  callback(false);
-    //};
-    //request.onupgradeneeded = event => {
-    //  var db = event.target.result;
-    //
-    //  db.transaction("users").objectStore("users").get(user_id).onsuccess = event => {
-    //    const resultObject = event.target.result;
-    //    callback(new User(resultObject.fullname, resultObject.email, resultObject.password, resultObject.imagepath, resultObject.user_id));
-    //  };
-    //};
+    let DBOpenRequest = window.indexedDB.open(DBRepository.getDBName(), 4);
+    DBOpenRequest.onsuccess = function(event) {
+      //console.log("Database Opened");
+    
+      // store the result of opening the database in the db variable.
+      // This is used a lot below
+      let db = DBOpenRequest.result;
+
+      let transaction = db.transaction(["users"], "readwrite");
+
+      // report on the success of the transaction completing, when everything is done
+      transaction.oncomplete = function(event) {
+        //console.log("transaction complete");
+      };
+
+      transaction.onerror = function(event) {
+        //console.log("error occured");
+      };
+
+      // create an object store on the transaction
+      let objectStore = transaction.objectStore("users");
+
+      // Make a request to add our newItem object to the object store
+      let objectStoreRequest = objectStore.get(user_id);
+
+      objectStoreRequest.onsuccess = function(event) {
+        // report the success of our request
+        //console.log("success objectsotre");
+        callback(event.target.result);
+        db.close();
+      };
+    };
 
   }
   
   static doesLoginExist(email, callback) {
+    let DBOpenRequest = window.indexedDB.open(DBRepository.getDBName(), 4);
+    DBOpenRequest.onsuccess = function(event) {
+      //console.log("Database Opened");
+    
+      // store the result of opening the database in the db variable.
+      // This is used a lot below
+      let db = DBOpenRequest.result;
 
+      let transaction = db.transaction(["users"], "readwrite");
+
+      // report on the success of the transaction completing, when everything is done
+      transaction.oncomplete = function(event) {
+        //console.log("transaction complete");
+      };
+
+      transaction.onerror = function(event) {
+        //console.log("error occured");
+      };
+
+      // create an object store on the transaction
+      let objectStore = transaction.objectStore("users");
+
+      // Make a request to add our newItem object to the object store
+      let objectStoreRequest = objectStore.get(email);
+
+      objectStoreRequest.onsuccess = function(event) {
+        // report the success of our request
+        //console.log("success objectsotre");
+        callback(true);
+        db.close();
+      };
+      objectStoreRequest.onerror = function(event){
+        callback(false);
+        db.close();
+      }
+    };
   }
 
 
@@ -268,7 +321,6 @@ class DBRepository{
   static getAllEvents(callback){
 
   }
-
 
   //  =========== EVENT PARTICIPATION =============================
   static addEventParticipation(addEventParticipationObject, callback) {
