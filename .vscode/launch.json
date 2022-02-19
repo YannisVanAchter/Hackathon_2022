@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "pwa-msedge",
+            "name": "http://console.log()",
+            "request": "launch",
+            "url": "http://console.log()"
+        }
+    ]
+}
