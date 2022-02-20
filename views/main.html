@@ -132,7 +132,7 @@
 				<div class="sidebar-btn">
 						<img src="../img/calendrier.png" alt="Calendrier" class="avatar">
 				</div>
-				<div><!---->  --------------- AGENDA  ------------------------- -->
+				<div><!----  --------------- AGENDA  ------------------------- -->
 					<div class="calendar">
 						<div class="headCalendar">
 							<i class="fas fa-angle-left prev" id="prevWeek"></i>
@@ -168,6 +168,9 @@
 							<h1 class="d_1">Dimanche
 								<p class="a_1"></p>
 							</h1>
+							<div id="details_events">
+									TEST
+							</div>
 						</div>
 						<script src="../js/Model/EventParticipation.js"></script>
 						<script src="../js/Adapters/DBRepository.js"></script>
@@ -242,7 +245,7 @@
 		});
 		/* -------  Définition des 3 icones de catégories  ------- */
 		var sportsICO = new LeafIcon({ iconUrl: '../img/sportsICO.jpg' }),
-			cultureICO = new LeafIcon({ iconUrl: '../img/cultureICO.png' }),
+			cultureICO = new LeafIcon({ iconUrl: '../img/cultureICO.jpg' }),
 			gamesICO = new LeafIcon({ iconUrl: '../img/gamesICO.jpg' });
 //
 		L.icon = function (options) {
@@ -283,9 +286,9 @@
 		}
 
 	/* -------  Définition des 3 icones de catégories  ------- */
-	let a_sportsICO = new LeafIcon({iconUrl: '../img/sportsICO.png'});
-  let a_cultureICO = new LeafIcon({iconUrl: '../img/cultureICO.png'});
-  let a_gamesICO = new LeafIcon({iconUrl: '../img/gamesICO.png'});
+	let a_sportsICO = new LeafIcon({iconUrl: '../img/sportsICO.jpg'});
+  	let a_cultureICO = new LeafIcon({iconUrl: '../img/cultureICO.jpg'});
+  	let a_gamesICO = new LeafIcon({iconUrl: '../img/gamesICO.jpg'});
 
 
 	L.icon = function (options) {
@@ -323,29 +326,24 @@
     });
   });
 
-	/*  -------  Choix des catégories ------- */
-/*	
-var 
-    sportss    = L.marker([50.467386, 4.857674], {icon: sportsICO}).addTo(map).bindPopup("Activité sportive.");
-    cult    = L.marker([50.465405, 4.862437], {icon: cultureICO}).addTo(map).bindPopup("Activité culturelle.");
-    gamess    = L.marker([50.46369, 4.859101], {icon: gamesICO}).addTo(map).bindPopup("Activité récréative.");
-Instead of adding them directly to the map, you can do the following, using the LayerGroup class:
 
-var sp = L.layerGroup([sportss]);
-var cu = L.layerGroup([cult]);
-var ga = L.layerGroup([gamess]);
-	
-	var overlayMaps = {
-    "Sports": sp
-	"Culture": cu
-	"Jeux": ga
-};
-	
-	L.control.layers(overlayMaps).addTo(map);
-*/	
-	
+  	/*  -------  AFFICHAGE/POPULATE DU CALENDRIER DANS LA SIDEBAR ------- */
+		DBRepository.getParticipations(1, function (event_list) {
+			console.log(event_list.length);
+			event_list.forEach(event_item => {
+				console.log(event_item.category_type);
+					DBRepository.getEvent(event_item.event_id, function(a))
+						if (a.begindate == currentdate) {
+							document.getElementsById.add(event_data.title)
 
+						}
+
+
+				document.getElementsById.add(event_data.title)
+			});
+		});
 	/*  -------  Fonction affichant les coordonnées de l'endroit cliqué ------- */
+/**/
 var popup = L.popup();
 
 //function onMapClick(e) {
