@@ -143,19 +143,19 @@
 						</div>
 					
 						<div id="agenda_mainpage">
-							<h1>Lundi</h1>
+							<h2>Lundi</h2>
               <p id="agenda_lundi"></p>
-							<h1>Mardi</h1>
+							<h2>Mardi</h2>
               <p id="agenda_mardi"></p>
-							<h1>Mercredi</h1>
+							<h2>Mercredi</h2>
               <p id="agenda_mercredi"></p>
-							<h1>Jeudi</h1>
+							<h2>Jeudi</h2>
               <p id="agenda_jeudi"></p>
-							<h1>Vendredi</h1>
+							<h2>Vendredi</h2>
               <p id="agenda_vendredi"></p>
-							<h1>Samedi</h1>
+							<h2>Samedi</h2>
               <p id="agenda_samedi"></p>
-							<h1>Dimanche</h1>
+							<h2 style="color: red;">Dimanche</h2>
               <p id="agenda_dimanche"></p>
 						</div>
 						<script src="../js/Model/EventParticipation.js"></script>
@@ -317,18 +317,6 @@
 
     }
     function refreshAgenda(){
-
-      let today = new Date().getDay();
-      switch(eventdate_day){
-        case 4: agendapositionelement = document.getElementById("agenda_dimanche"); break;
-        case 5: agendapositionelement = document.getElementById("agenda_lundi"); break;
-        case 6: agendapositionelement = document.getElementById("agenda_mardi"); break;
-        case 0: agendapositionelement = document.getElementById("agenda_mercredi"); break;
-        case 1: agendapositionelement = document.getElementById("agenda_jeudi"); break;
-        case 2: agendapositionelement = document.getElementById("agenda_vendredi"); break;
-        case 3: agendapositionelement = document.getElementById("agenda_samedi"); break;
-      }
-
       document.getElementById("agenda_dimanche").innerHTML="";
       document.getElementById("agenda_lundi").innerHTML="";
       document.getElementById("agenda_mardi").innerHTML="";
