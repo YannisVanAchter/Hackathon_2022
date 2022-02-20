@@ -137,20 +137,27 @@
 						<div class="headCalendar">
 							<i class="fas fa-angle-left prev" id="prevWeek"></i>
 							<div class="row">
-								<h1>Semaine :</h1>
+								<h1>Semaine du 21/02 au 27/02</h1>
 								<h3 class="semaine"></h3>
 							</div>
 							<i class="fas fa-angle-right next" id="nextWeek"></i>
 						</div>
 					
 						<div id="agenda_mainpage">
-							<h1 id="agenda_lundi">Lundi</h1>
-							<h1 id="agenda_mardi">Mardi</h1>
-							<h1 id="agenda_mercredi">Mercredi</h1>
-							<h1 id="agenda_jeudi">Jeudi</h1>
-							<h1 id="agenda_vendredi">Vendredi</h1>
-							<h1 id="agenda_samedi">Samedi</h1>
-							<h1 id="agenda_dimanche">Dimanche</h1>
+							<h1>Lundi</h1>
+              <p id="agenda_lundi"></p>
+							<h1>Mardi</h1>
+              <p id="agenda_mardi"></p>
+							<h1>Mercredi</h1>
+              <p id="agenda_mercredi"></p>
+							<h1>Jeudi</h1>
+              <p id="agenda_jeudi"></p>
+							<h1>Vendredi</h1>
+              <p id="agenda_vendredi"></p>
+							<h1>Samedi</h1>
+              <p id="agenda_samedi"></p>
+							<h1>Dimanche</h1>
+              <p id="agenda_dimanche"></p>
 						</div>
 						<script src="../js/Model/EventParticipation.js"></script>
 						<script src="../js/Adapters/DBRepository.js"></script>
@@ -261,6 +268,7 @@
   }
 
 	/*  -------  Positionnement d'icones d'activités ==> Dévelloper une fonction qui parcoure la DB ------- */
+  let marker_list = [];
   DBRepository.getAllEvents(function(event_list){
     console.log(event_list.length);
     event_list.forEach(event_item => {
@@ -277,14 +285,35 @@
         xmlHttp.send( null );
         const event_lat = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lat;
         const event_lng = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lng;
-        L.marker([event_lat, event_lng], {icon: event_icon}).addTo(map).bindPopup("<h2>"+event_item.title + '</h2><br/>' + event_item.begindate +" - "+ event_item.endingdate +'<br/>'+ event_item.description
+        const event_marker = L.marker([event_lat, event_lng], {icon: event_icon}).addTo(map).bindPopup("<h2>"+event_item.title + '</h2><br/>' + event_item.begindate +" - "+ event_item.endingdate +'<br/>'+ event_item.description
         + '<div id=\"participant_div\"></div><br/><button onClick=\"jeparticipe('+event_item.event_id+')\">Je participe</button>'/* + '<button style=\"margin-left:5px;\">Participants</button>'*/);
-    });
+        marker_list.push({event_id: event_item.event_id, marker: event_marker});
+      });
   });
 
 
   	/*  -------  AFFICHAGE/POPULATE DU CALENDRIER DANS LA SIDEBAR ------- */
+    function selectMarker(event_id){
+      marker_list.forEach(marker_item => {
+        if(marker_item.event_id === event_id){
+          marker_item.marker.openPopup();
+        }
+      });
+      //http://www.mapquestapi.com/directions/v2/route?key=KEY&from=Clarendon Blvd,Arlington,VA&to=2400+S+Glebe+Rd,+Arlington,+VA
+      //var xmlHttp = new XMLHttpRequest();
+      //xmlHttp.open( "GET", "http://open.mapquestapi.com/geocoding/v1/address?key="+"RaEacuhNAZEHQ3ArwIntrabbpiq9aHvT"+"&location="+encodeURIComponent(event_item.location), false ); // false for synchronous request
+      //xmlHttp.send( null );
+      //xmlHttp.responseText
+
+    }
     function refreshAgenda(){
+      document.getElementById("agenda_dimanche").innerHTML="";
+      document.getElementById("agenda_lundi").innerHTML="";
+      document.getElementById("agenda_mardi").innerHTML="";
+      document.getElementById("agenda_mercredi").innerHTML="";
+      document.getElementById("agenda_jeudi").innerHTML="";
+      document.getElementById("agenda_vendredi").innerHTML="";
+      document.getElementById("agenda_samedi").innerHTML="";
       DBRepository.getParticipations(1, function (participation_list) {
 			  console.log(participation_list.length);
         participation_list.forEach(participation => {
@@ -292,15 +321,15 @@
 						let eventdate_day = new Date(event_item.begindate).getDay();
             let agendapositionelement = null;
             switch(eventdate_day){
-              case 0: agendapositionelement = document.getElementById("agenda_dimanche"); break;
-              case 1: agendapositionelement = document.getElementById("agenda_lundi"); break;
-              case 2: agendapositionelement = document.getElementById("agenda_mardi"); break;
-              case 3: agendapositionelement = document.getElementById("agenda_mercredi"); break;
-              case 4: agendapositionelement = document.getElementById("agenda_jeudi"); break;
-              case 5: agendapositionelement = document.getElementById("agenda_vendredi"); break;
-              case 6: agendapositionelement = document.getElementById("agenda_samedi"); break;
+              case 4: agendapositionelement = document.getElementById("agenda_dimanche"); break;
+              case 5: agendapositionelement = document.getElementById("agenda_lundi"); break;
+              case 6: agendapositionelement = document.getElementById("agenda_mardi"); break;
+              case 0: agendapositionelement = document.getElementById("agenda_mercredi"); break;
+              case 1: agendapositionelement = document.getElementById("agenda_jeudi"); break;
+              case 2: agendapositionelement = document.getElementById("agenda_vendredi"); break;
+              case 3: agendapositionelement = document.getElementById("agenda_samedi"); break;
             }
-				    agendapositionelement.innerHTML += "<p>"+event_item.title+" - "+event_item.begindate+"</p><br/>"
+				    agendapositionelement.innerHTML += "<p onClick='selectMarker("+event_item.event_id+")'>"+event_item.title+" - "+event_item.begindate+"</p><br/>"
 			    });
 		    });
       });
