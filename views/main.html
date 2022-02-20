@@ -16,54 +16,58 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 
+	<!-- CSS Whovians CSS -->
+	<link href="../styles/homePageStyles.css" rel="stylesheet">
+	
+
 <style>
-body {
-  margin: 2px;
-}
-
-ul {
-font-size: 28px;
-list-style-type: none;
-margin: 5px;
-padding: 5px;
-width: 18%;
-background-color: #f1f1f1;
-position: fixed;
-height: 25%;
-/*overflow: auto;*/
-float: right;
-text-align: center;
-border: 2px solid yellow;
-
-}
-
-li {
-border: 2px solid red;
-height: 50%;
-margin: 5% 0 15% 0;
-padding: 5%;
-}
-
-li a {
-  display: block;
-  color: #000;
-  text-decoration: none;
-}
-
-li a.active {
-  background-color: #04AA6D;
-  color: white;
-}
-
-li a:hover:not(.active) {
-  background-color: #555;
-  color: white;
-}
-.leaflet-container {
-	display: block;
-	width: 95%;
-	height: 95%;
+	body {
+	  margin: 2px;
 	}
+
+	ul {
+	font-size: 28px;
+	list-style-type: none;
+	margin: 5px;
+	padding: 5px;
+	width: 18%;
+	background-color: #f1f1f1;
+	position: fixed;
+	height: 25%;
+	/*overflow: auto;*/
+	float: right;
+	text-align: center;
+	border: 2px solid yellow;
+
+	}
+
+	li {
+	border: 2px solid red;
+	height: 50%;
+	margin: 5% 0 15% 0;
+	padding: 5%;
+	}
+
+	li a {
+	  display: block;
+	  color: #000;
+	  text-decoration: none;
+	}
+
+	li a.active {
+	  background-color: #04AA6D;
+	  color: white;
+	}
+
+	li a:hover:not(.active) {
+	  background-color: #555;
+	  color: white;
+	}
+	.leaflet-container {
+		display: block;
+		width: 85%;
+		height: 95%;
+		}
 </style>
 
 	
@@ -73,8 +77,19 @@ li a:hover:not(.active) {
 
 <div style="margin-left:80%;padding:2px 2px;height:100px;">
 <ul>
-  <li><a class="active" href="#calendar.html">Calendrier</a></li>
-  <li><a href="#userprofile.html">Profil</a></li>
+	<li>
+	  <iframe src="homePage.html" name="calendar" style="border:2px solid red;" title="Iframe Calendrier">
+		<a href="homePage.html" target="calendar">
+		<!-- piste, getElemByID.show: Hidden/visible  -->
+			<img src="../img/calendrier.png" alt="Calendrier" class="avatar">
+		</a>
+	  </iframe>
+	</li>
+	<li>
+		<a href="profil_page.html">
+			<img src="../img/avatar.png" alt="Photo de profil" class="avatar">
+		</a>
+	</li>
 </ul>
 </div>
 
