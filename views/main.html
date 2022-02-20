@@ -290,6 +290,15 @@
     return new L.Icon(options);
 	};
 	
+  function jeparticipe(event_id_a){
+    console.log("je participe " + event_id_a);
+    DBRepository.addEventParticipation({user_id: 1, event_id: event_id_a, eventparticipation_id: null}, function(){
+    });
+  }
+  function voirparticipants(){
+    console.log("participants");
+  }
+
 	/*  -------  Positionnement d'icones d'activités ==> Dévelloper une fonction qui parcoure la DB ------- */
   DBRepository.getAllEvents(function(event_list){
     console.log(event_list.length);
@@ -308,7 +317,7 @@
         const event_lat = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lat;
         const event_lng = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lng;
         L.marker([event_lat, event_lng], {icon: event_icon}).addTo(map).bindPopup("<h2>"+event_item.title + '</h2><br/>' + event_item.begindate +" - "+ event_item.endingdate +'<br/>'+ event_item.description
-        + '<br/><button>Je participe</button>' + '<button>Participants</button>');
+        + '<div id=\"participant_div\"></div><br/><button onClick=\"jeparticipe('+event_item.event_id+')\">Je participe</button>' + '<button style=\"margin-left:5px;\">Participants</button>');
     });
   });
 
@@ -337,18 +346,18 @@ var ga = L.layerGroup([gamess]);
 	/*  -------  Fonction affichant les coordonnées de l'endroit cliqué ------- */
 var popup = L.popup();
 
-function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent("Vous avez cliqué en : " + e.latlng.toString())
-        .openOn(map);
-}
-
-map.on('click', onMapClick);
+//function onMapClick(e) {
+//    popup
+//        .setLatLng(e.latlng)
+//        .setContent("Vous avez cliqué en : " + e.latlng.toString())
+//        .openOn(map);
+//}
+//
+//map.on('click', onMapClick);
 
 	</script>
 
-  
+
 	<!--jQuery(necessary for Bootstrap's JavaScript plugins) -->
 	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" ></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
