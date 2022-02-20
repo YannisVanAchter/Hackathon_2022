@@ -200,6 +200,7 @@
 		
 		let user_long = 4.85769;
 		let user_lat = 50.465826;
+    let current_user_location_address = "";
 		let setuserPositionMarker = function(){
 			DBRepository.getUser(1, function(user){
 			var userAvatarIcon = new LeafIcon({iconUrl: '../img/'+user.avatar_filename});
@@ -212,6 +213,13 @@
 		    user_lat = position.coords.latitude;
 		    user_long = position.coords.longitude;
 		    console.log(user_lat+" "+user_long);
+        var xmlHttp = new XMLHttpRequest();
+        //http://www.mapquestapi.com/geocoding/v1/reverse?key=RaEacuhNAZEHQ3ArwIntrabbpiq9aHvT&location=30.333472,-81.470448&includeRoadMetadata=true&includeNearestIntersection=true
+        xmlHttp.open( "GET", "http://www.mapquestapi.com/geocoding/v1/reverse?key=RaEacuhNAZEHQ3ArwIntrabbpiq9aHvT&location="+user_lat+","+user_long+"&includeRoadMetadata=true&includeNearestIntersection=true", false ); // false for synchronous request
+        xmlHttp.send( null );
+        let location_object = JSON.parse(xmlHttp.responseText).results[0].locations[0];
+        current_user_location_address = location_object.street +", "+ location_object.adminArea1Type;
+        console.log(current_user_location_address);
 		    setuserPositionMarker(); 
 		}, function(){setuserPositionMarker();}, {timeout:10000});
 
@@ -290,17 +298,20 @@
 
 
   	/*  -------  AFFICHAGE/POPULATE DU CALENDRIER DANS LA SIDEBAR ------- */
-    function selectMarker(event_id){
+    function selectMarker(event_id, event_location){
       marker_list.forEach(marker_item => {
         if(marker_item.event_id === event_id){
           marker_item.marker.openPopup();
         }
       });
-      //http://www.mapquestapi.com/directions/v2/route?key=KEY&from=Clarendon Blvd,Arlington,VA&to=2400+S+Glebe+Rd,+Arlington,+VA
-      //var xmlHttp = new XMLHttpRequest();
-      //xmlHttp.open( "GET", "http://open.mapquestapi.com/geocoding/v1/address?key="+"RaEacuhNAZEHQ3ArwIntrabbpiq9aHvT"+"&location="+encodeURIComponent(event_item.location), false ); // false for synchronous request
+      //http://www.mapquestapi.com/directions/v2/route?key=RaEacuhNAZEHQ3ArwIntrabbpiq9aHvT&from=Clarendon Blvd,Arlington,VA&to=2400+S+Glebe+Rd,+Arlington,+VA
+      var xmlHttp = new XMLHttpRequest();
+      //xmlHttp.open( "GET", "http://www.mapquestapi.com/directions/v2/route?key=RaEacuhNAZEHQ3ArwIntrabbpiq9aHvT&from="+encodeURIComponent(current_user_location_address)+"&to="+encodeURIComponent(event_location), false ); // false for synchronous request
+      ////console.log("http://www.mapquestapi.com/directions/v2/route?key=RaEacuhNAZEHQ3ArwIntrabbpiq9aHvT&from="+current_user_location_address+"&to="+event_location);
       //xmlHttp.send( null );
-      //xmlHttp.responseText
+      //console.log(xmlHttp.responseText);
+      //let location_object = JSON.parse(xmlHttp.responseText).results[0];
+      //console.log(location_object.length);
 
     }
     function refreshAgenda(){
@@ -326,7 +337,7 @@
               case 2: agendapositionelement = document.getElementById("agenda_vendredi"); break;
               case 3: agendapositionelement = document.getElementById("agenda_samedi"); break;
             }
-				    agendapositionelement.innerHTML += "<p onClick='selectMarker("+event_item.event_id+")'>"+event_item.title+" - "+event_item.begindate+"</p><br/>"
+				    agendapositionelement.innerHTML += "<p onClick='selectMarker("+event_item.event_id+", \""+event_item.location+"\")'>"+event_item.title+" - "+event_item.begindate+"</p><br/>"
 			    });
 		    });
       });
