@@ -104,7 +104,28 @@ class DBRepository{
 
   static seedEvents(callback){
     const event_data = [
-      {event_id:1, title:"Promenade du soir", begindate:1645365000, endingdate:1645379400, location:"Rue Godefroid 29, 5000 Namur", description:"Venez on digère ensemble en marchant le long des quais à notre aise.", category:"promenade", category_type:"Sport"},
+      {event_id:1,  title:"Promenade du soir", begindate:"2022-01-24T01:12:49Z", endingdate:"2022-01-24T04:12:49Z", location:"Rue Godefroid 29, 5000 Namur", description:"Venez on digère ensemble en marchant le long des quais à notre aise.", category:"promenade", category_type:"Sport"},
+      {event_id:2,  title:"Partie de scrable", begindate:"2022-01-20T01:12:49Z", endingdate:"2022-01-20T04:12:49Z", location:"Rue Rue Basse Marcelle 6-28, 5000 Namur", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit.", category:"scrabble", category_type:"Jeux"},
+      {event_id:3,  title:"Tournois d'échec", begindate:"2022-01-20T01:12:49Z", endingdate:"2022-01-20T04:12:49Z", location:"Rue Julie Billiart 25-1, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"échecs", category_type:"Jeux"},
+      {event_id:4,  title:"Expo classisime", begindate:"2022-01-21T01:12:49Z", endingdate:"2022-01-21T04:12:49Z", location:"Rue de Fer 72, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"exposition", category_type:"Art"},
+      {event_id:5,  title:"Séminaire cybersecurité", begindate:"2022-01-22T01:12:49Z", endingdate:"2022-01-22T04:12:49Z", location:"Bd du N 3-7, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"céminaire", category_type:"Art"},
+      {event_id:6,  title:"marché de la semaine", begindate:"2022-01-23T01:12:49Z", endingdate:"2022-01-23T04:12:49Z", location:"Rue de la Pépinière 36, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"promenade", category_type:"Sport"},
+      {event_id:7,  title:"Présentation Tupperware", begindate:"2022-01-23T01:12:49Z", endingdate:"2022-01-23T04:12:49Z", location:"Rue Adolphe Bastin 52, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"commercial", category_type:"Sport"},
+      {event_id:8,  title:"Promenade dans le parc", begindate:"2022-01-24T01:12:49Z", endingdate:"2022-01-24T04:12:49Z", location:"Rue Raymon Museu 21, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"promenade", category_type:"Sport"},
+      {event_id:9,  title:"Atelier de potterie", begindate:"2022-01-24T01:12:49Z", endingdate:"2022-01-24T04:12:49Z", location:"Rue du Moulin Lavigne 6, 5002 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"poterie", category_type:"Art"},
+      {event_id:10, title:"Bridge", begindate:"2022-01-24T01:12:49Z", endingdate:"2022-01-24T04:12:49Z", location:"Rue Emile Cuvelier 41, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"cartes", category_type:"Jeux"},
+      {event_id:11, title:"Scrabble au chapi", begindate:"2022-01-24T01:12:49Z", endingdate:"2022-01-24T04:12:49Z", location:"Rue Notre Dame 14, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"scrabble", category_type:"Jeux"},
+      {event_id:12, title:"Carnaval des ainés", begindate:"2022-01-26T01:12:49Z", endingdate:"2022-01-26T04:12:49Z", location:"Av. Blanche de Namur 5, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"promenade", category_type:"Sport"},
+      {event_id:13, title:"Strip poker de josianne", begindate:"2022-01-26T01:12:49Z", endingdate:"2022-01-26T04:12:49Z", location:"Av. du Milieu du Monde 13-7, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"cardio", category_type:"Sport"},
+      {event_id:14, title:"Prière à la bougie", begindate:"2022-01-26T01:12:49Z", endingdate:"2022-01-26T04:12:49Z", location:"All. de Menton 2-20, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"méditation", category_type:"Sport"},
+      {event_id:15, title:"Sacrifice du poulet", begindate:"2022-01-27T01:12:49Z", endingdate:"2022-01-27T04:12:49Z", location:"All. de Menton 32, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"sacrifice", category_type:"Art"},
+      {event_id:16, title:"Théatre Le malade imaginaire", begindate:"2022-01-28T01:12:49Z", endingdate:"2022-01-28T04:12:49Z", location:"Rue du Travail, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"théâtre", category_type:"Art"},
+      {event_id:17, title:"Spencer au cinéma", begindate:"2022-01-28T08:12:49Z", endingdate:"2022-01-28T09:12:49Z", location:"Av. Vauban 56, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"cinéma", category_type:"Art"},
+      {event_id:18, title:"Je me sens seul", begindate:"2022-01-26T01:12:49Z", endingdate:"2022-01-26T04:12:49Z", location:"Rue Henri Lemaïtre, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"psychiatrie", category_type:"Jeux"},
+      {event_id:19, title:"Kayak", begindate:"2022-01-30T01:12:49Z", endingdate:"2022-01-30T04:12:49Z", location:"Rue Catherine de Savoie 3, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"kayak", category_type:"Sport"},
+      {event_id:20, title:"Badmington au country club", begindate:"2022-01-30T01:12:49Z", endingdate:"2022-01-30T04:12:49Z", location:"Rte Merveilleuse 60, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"badmington", category_type:"Sport"},
+      {event_id:21, title:"Ronde dans le quartier", begindate:"2022-01-24T31:12:49Z", endingdate:"2022-01-31T04:12:49Z", location:"Rue Yolande de Namur 8, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"po-police", category_type:"Jeux"},
+      {event_id:22, title:"Vide grenier", begindate:"2022-01-31T01:12:49Z", endingdate:"2022-01-31T04:12:49Z", location:"Rue Basse Marcelle 6-28, 5000 Namur", description:"Nam id neque nec mi cursus imperdiet eu quis nisl.", category:"commercial", category_type:"Jeux"},
     ];
 
     let cpt = 0;
@@ -121,7 +142,42 @@ class DBRepository{
 
   static seedEventParticipations(callback){
     const event_participation_data = [
-      {eventparticipation_id:1, user_id:1, event_id:1},
+      {eventparticipation_id:1,  user_id:16, event_id:1},
+      {eventparticipation_id:2,  user_id:1,  event_id:2},
+      {eventparticipation_id:3,  user_id:1,  event_id:3},
+      {eventparticipation_id:4,  user_id:2,  event_id:4},
+      {eventparticipation_id:5,  user_id:3,  event_id:5},
+      {eventparticipation_id:6,  user_id:5,  event_id:6},
+      {eventparticipation_id:7,  user_id:5,  event_id:7},
+      {eventparticipation_id:8,  user_id:6,  event_id:8},
+      {eventparticipation_id:9,  user_id:3,  event_id:9},
+      {eventparticipation_id:10, user_id:9,  event_id:10},
+      {eventparticipation_id:11, user_id:12, event_id:11},
+      {eventparticipation_id:12, user_id:12, event_id:12},
+      {eventparticipation_id:13, user_id:7,  event_id:13},
+      {eventparticipation_id:14, user_id:7,  event_id:14},
+      {eventparticipation_id:15, user_id:6,  event_id:15},
+      {eventparticipation_id:16, user_id:6,  event_id:16},
+      {eventparticipation_id:17, user_id:10, event_id:17},
+      {eventparticipation_id:18, user_id:10, event_id:18},
+      {eventparticipation_id:19, user_id:10, event_id:19},
+      {eventparticipation_id:20, user_id:5,  event_id:20},
+      {eventparticipation_id:21, user_id:6,  event_id:21},
+      {eventparticipation_id:22, user_id:7,  event_id:22},
+      {eventparticipation_id:23, user_id:8,  event_id:21},
+      {eventparticipation_id:24, user_id:9,  event_id:14},
+      {eventparticipation_id:25, user_id:10, event_id:15},
+      {eventparticipation_id:26, user_id:2,  event_id:16},
+      {eventparticipation_id:27, user_id:4,  event_id:17},
+      {eventparticipation_id:28, user_id:7,  event_id:18},
+      {eventparticipation_id:29, user_id:14, event_id:19},
+      {eventparticipation_id:30, user_id:9,  event_id:1},
+      {eventparticipation_id:31, user_id:8,  event_id:2},
+      {eventparticipation_id:32, user_id:6,  event_id:3},
+      {eventparticipation_id:33, user_id:1,  event_id:4},
+      {eventparticipation_id:34, user_id:2,  event_id:5},
+      {eventparticipation_id:35, user_id:2,  event_id:6},
+      {eventparticipation_id:36, user_id:3,  event_id:7},
     ];
 
     let cpt = 0;
