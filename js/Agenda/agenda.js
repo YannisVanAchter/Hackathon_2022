@@ -30,4 +30,14 @@ var headCalendar = "Semaine du " + getMonday(current) + " au " + getSunday(curre
 var weekCalendar = {
     
 }
+document.getElementById("prevWeek").addEventListener("click", prevW);
+document.getElementById("nextWeek").addEventListener("click", nextW);
+
+function prevW() {
+    date -= 7;
+}
+
+function nextW() {
+    date += 7;
+}
 
