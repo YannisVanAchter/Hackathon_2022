@@ -137,20 +137,27 @@
 						<div class="headCalendar">
 							<i class="fas fa-angle-left prev" id="prevWeek"></i>
 							<div class="row">
-								<h1>Semaine :</h1>
+								<h1>Semaine du 21/02 au 27/02</h1>
 								<h3 class="semaine"></h3>
 							</div>
 							<i class="fas fa-angle-right next" id="nextWeek"></i>
 						</div>
 					
 						<div id="agenda_mainpage">
-							<h1 id="agenda_lundi">Lundi</h1>
-							<h1 id="agenda_mardi">Mardi</h1>
-							<h1 id="agenda_mercredi">Mercredi</h1>
-							<h1 id="agenda_jeudi">Jeudi</h1>
-							<h1 id="agenda_vendredi">Vendredi</h1>
-							<h1 id="agenda_samedi">Samedi</h1>
-							<h1 id="agenda_dimanche">Dimanche</h1>
+							<h1>Lundi</h1>
+              <p id="agenda_lundi"></p>
+							<h1>Mardi</h1>
+              <p id="agenda_mardi"></p>
+							<h1>Mercredi</h1>
+              <p id="agenda_mercredi"></p>
+							<h1>Jeudi</h1>
+              <p id="agenda_jeudi"></p>
+							<h1>Vendredi</h1>
+              <p id="agenda_vendredi"></p>
+							<h1>Samedi</h1>
+              <p id="agenda_samedi"></p>
+							<h1>Dimanche</h1>
+              <p id="agenda_dimanche"></p>
 						</div>
 						<script src="../js/Model/EventParticipation.js"></script>
 						<script src="../js/Adapters/DBRepository.js"></script>
@@ -285,6 +292,13 @@
 
   	/*  -------  AFFICHAGE/POPULATE DU CALENDRIER DANS LA SIDEBAR ------- */
     function refreshAgenda(){
+      document.getElementById("agenda_dimanche").innerHTML="";
+      document.getElementById("agenda_lundi").innerHTML="";
+      document.getElementById("agenda_mardi").innerHTML="";
+      document.getElementById("agenda_mercredi").innerHTML="";
+      document.getElementById("agenda_jeudi").innerHTML="";
+      document.getElementById("agenda_vendredi").innerHTML="";
+      document.getElementById("agenda_samedi").innerHTML="";
       DBRepository.getParticipations(1, function (participation_list) {
 			  console.log(participation_list.length);
         participation_list.forEach(participation => {
@@ -292,13 +306,13 @@
 						let eventdate_day = new Date(event_item.begindate).getDay();
             let agendapositionelement = null;
             switch(eventdate_day){
-              case 0: agendapositionelement = document.getElementById("agenda_dimanche"); break;
-              case 1: agendapositionelement = document.getElementById("agenda_lundi"); break;
-              case 2: agendapositionelement = document.getElementById("agenda_mardi"); break;
-              case 3: agendapositionelement = document.getElementById("agenda_mercredi"); break;
-              case 4: agendapositionelement = document.getElementById("agenda_jeudi"); break;
-              case 5: agendapositionelement = document.getElementById("agenda_vendredi"); break;
-              case 6: agendapositionelement = document.getElementById("agenda_samedi"); break;
+              case 4: agendapositionelement = document.getElementById("agenda_dimanche"); break;
+              case 5: agendapositionelement = document.getElementById("agenda_lundi"); break;
+              case 6: agendapositionelement = document.getElementById("agenda_mardi"); break;
+              case 0: agendapositionelement = document.getElementById("agenda_mercredi"); break;
+              case 1: agendapositionelement = document.getElementById("agenda_jeudi"); break;
+              case 2: agendapositionelement = document.getElementById("agenda_vendredi"); break;
+              case 3: agendapositionelement = document.getElementById("agenda_samedi"); break;
             }
 				    agendapositionelement.innerHTML += "<p>"+event_item.title+" - "+event_item.begindate+"</p><br/>"
 			    });
