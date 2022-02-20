@@ -19,7 +19,7 @@
                     console.log('users initialized');
                     DBRepository.seedEvents(function(eventSeedSuccess){
                       console.log('events initialized');
-                      DBRepository.SeedEventParticipations(function(eventParticipationSuccess){
+                      DBRepository.seedEventParticipations(function(eventParticipationSuccess){
                         console.log('eventParticipations initialized');
 
                       });
@@ -31,13 +31,16 @@
                   DBRepository.getUser(1, function(user){
                     console.log(user.fullname)
                   });
-                  //DBRepository.getLastId("users", function(lastID){
-
-                  //});
+                  DBRepository.doesLoginExist('l.lantoine@gmail.co.uk', function(doesExist){
+                    console.log("antoine "+doesExist);
+                  });
+                  DBRepository.doesLoginExist('m.antoinette@gmail.com', function(doesExist){
+                    console.log("marie " + doesExist);
+                  });
 
 
                 } else {
-                  document.getElementById('#maintitle').innerHTML = "Une erreure s'est produite ! Réessayer plus tard";
+                  document.getElementById('maintitle').innerHTML = "Une erreure s'est produite ! Réessayer plus tard";
                 }
                 
               });

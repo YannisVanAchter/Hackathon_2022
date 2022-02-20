@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 
+	<!-- CSS Whovians CSS -->
+	<link href="../styles/homePageStyles.css" rel="stylesheet">
+	
+
 <style>
 	body {
 	  margin: 2px;
@@ -61,7 +65,7 @@
 	}
 	.leaflet-container {
 		display: block;
-		width: 95%;
+		width: 85%;
 		height: 95%;
 		}
 </style>
@@ -73,8 +77,19 @@
 
 <div style="margin-left:80%;padding:2px 2px;height:100px;">
 <ul>
-  <li><a class="active" href="#calendar.html">Calendrier</a></li>
-  <li><a href="profil_page.html">Profil</a></li>
+	<li>
+	  <iframe src="homePage.html" name="calendar" style="border:2px solid red;" title="Iframe Calendrier">
+		<a href="homePage.html" target="calendar">
+		<!-- piste, getElemByID.show: Hidden/visible  -->
+			<img src="../img/calendrier.png" alt="Calendrier" class="avatar">
+		</a>
+	  </iframe>
+	</li>
+	<li>
+		<a href="profil_page.html">
+			<img src="../img/avatar.png" alt="Photo de profil" class="avatar">
+		</a>
+	</li>
 </ul>
 </div>
 
