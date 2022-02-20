@@ -143,9 +143,9 @@
 		});
 
 	/* -------  Définition des 3 icones de catégories  ------- */
-	var sportsICO = new LeafIcon({iconUrl: '../img/sportsICO.jpg'}),
-		cultureICO = new LeafIcon({iconUrl: '../img/cultureICO.png'}),
-		gamesICO = new LeafIcon({iconUrl: '../img/gamesICO.jpg'});
+	let sportsICO = new LeafIcon({iconUrl: '../img/sportsICO.jpg'});
+  let cultureICO = new LeafIcon({iconUrl: '../img/cultureICO.png'});
+  let gamesICO = new LeafIcon({iconUrl: '../img/gamesICO.jpg'});
 
 
 	L.icon = function (options) {
@@ -153,20 +153,25 @@
 	};
 	
 	/*  -------  Positionnement d'icones d'activités ==> Dévelloper une fonction qui parcoure la DB ------- */
-  DBRepository.getParticipations(1, function(participations){
-    participations.forEach(participation => {
-      DBRepository.getEvent(participation.event_id, function(event_item){
-        let event_icon = cultureICO;
+  DBRepository.getAllEvents(function(event_list){
+    console.log(event_list.length);
+    event_list.forEach(event_item => {
+      console.log(event_item.category_type);
+      const event_icon = new LeafIcon({iconUrl: '../img/cultureICO.png'});
         if(event_item.category_type === "Sport") {
-          event_icon = sportsICO;
+          event_icon = new LeafIcon({iconUrl: '../img/sportsICO.jpg'});
         } else if(event_item.category_type === "Jeux") {
-          event_icon = gamesICO;
+          event_icon = new LeafIcon({iconUrl: '../img/gamesICO.jpg'});
         }
-        L.marker([50.467386, 4.857674], {icon: spevent_iconortsICO}).addTo(map).bindPopup(event_item.title);
-      });
+        //http://open.mapquestapi.com/geocoding/v1/address?key=KEY&location=Washington,DC
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", "http://open.mapquestapi.com/geocoding/v1/address?key="+"RaEacuhNAZEHQ3ArwIntrabbpiq9aHvT"+"&location="+encodeURIComponent(event_item.location), false ); // false for synchronous request
+        xmlHttp.send( null );
+        const event_lat = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lat;
+        const event_lng = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lng;
+        L.marker([event_lat, event_lng], {icon: event_icon}).addTo(map).bindPopup(event_item.title);
     });
   });
-
 
 	/*  -------  Choix des catégories ------- */
 /*	
