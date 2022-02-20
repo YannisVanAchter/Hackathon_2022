@@ -3,8 +3,8 @@
 <html lang="en">
 <head>
 	
-	<title>Quick Start - Leaflet</title>
-
+	<title>Proches Et Vous !</title>
+  <script src="../js/Adapters/DBRepository.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
@@ -16,65 +16,94 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 
+	<!-- CSS Whovians CSS -->
+	<link href="../styles/homePageStyles.css" rel="stylesheet">
+	
+
 <style>
-body {
-  margin: 2px;
-}
-
-ul {
-font-size: 28px;
-list-style-type: none;
-margin: 5px;
-padding: 5px;
-width: 18%;
-background-color: #f1f1f1;
-position: fixed;
-height: 25%;
-/*overflow: auto;*/
-float: right;
-text-align: center;
-border: 2px solid yellow;
-
-}
-
-li {
-border: 2px solid red;
-height: 50%;
-margin: 5% 0 15% 0;
-padding: 5%;
-}
-
-li a {
-  display: block;
-  color: #000;
-  text-decoration: none;
-}
-
-li a.active {
-  background-color: #04AA6D;
-  color: white;
-}
-
-li a:hover:not(.active) {
-  background-color: #555;
-  color: white;
-}
-.leaflet-container {
-	display: block;
-	width: 95%;
-	height: 95%;
+	body {
+	  margin: 2px;
 	}
+
+	ul {
+	font-size: 28px;
+	list-style-type: none;
+	margin: 5px;
+	padding: 5px;
+	width: 18%;
+	background-color: #f1f1f1;
+	position: fixed;
+	height: 25%;
+	/*overflow: auto;*/
+	float: right;
+	text-align: center;
+	border: 2px solid yellow;
+
+	}
+
+	li {
+	border: 2px solid red;
+	height: 50%;
+	margin: 5% 0 15% 0;
+	padding: 5%;
+	}
+
+	li a {
+	  display: block;
+	  color: #000;
+	  text-decoration: none;
+	}
+
+	li a.active {
+	  background-color: #04AA6D;
+	  color: white;
+	}
+
+	li a:hover:not(.active) {
+	  background-color: #555;
+	  color: white;
+	}
+	.leaflet-container {
+		display: block;
+		width: 85%;
+		height: 95%;
+		}
 </style>
 
 	
 </head>
 <body>
 
+	<nav class="navbar bg-navbar">
+		<div class="container">
+			<div class="navbar-header">
+			  <a class="navbar-brand" href="#">
+				  <img src="../img/logo_squared.png" width="70" height="70" alt="">
+			  </a>
+			</div>
+			<nav class="navbar navbar-expand-sm justify-content-right">
+				<button class="btn navbar-btn">CREER UN EVENEMENT</button>
+				<button class="btn navbar-btn">MON COMPTE</button>
+			</nav>
+			
+		  </div>
+	</nav>
 
 <div style="margin-left:80%;padding:2px 2px;height:100px;">
 <ul>
-  <li><a class="active" href="#calendar.html">Calendrier</a></li>
-  <li><a href="#userprofile.html">Profil</a></li>
+	<li>
+	  <iframe src="homePage.html" name="calendar" style="border:2px solid red;" title="Iframe Calendrier">
+		<a href="homePage.html" target="calendar">
+		<!-- piste, getElemByID.show: Hidden/visible  -->
+			<img src="../img/calendrier.png" alt="Calendrier" class="avatar">
+		</a>
+	  </iframe>
+	</li>
+	<li>
+		<a href="profil_page.html">
+			<img src="../img/avatar.png" alt="Photo de profil" class="avatar">
+		</a>
+	</li>
 </ul>
 </div>
 
@@ -96,8 +125,24 @@ li a:hover:not(.active) {
 		
 	/*  -------  VOUS ETES ICI ------- */
 
-		var marker = L.marker([50.465826, 4.85769]).addTo(map)
-			.bindPopup('<b>Bonjour $name</b><br />Vous êtes ici.').openPopup();
+  let user_long = 4.85769;
+  let user_lat = 50.465826;
+  let setUserPositionMarker = function(){
+    DBRepository.getUser(1, function(user){
+      var userAvatarIcon = new LeafIcon({iconUrl: '../img/'+user.avatar_filename});
+      var marker = L.marker([user_lat, user_long], {icon: userAvatarIcon}).addTo(map)
+			  .bindPopup('<b>Bonjour '+user.fullname+'</b><br />Vous êtes ici.').openPopup();
+    });
+  }
+    navigator.geolocation.getCurrentPosition(function(position){
+        user_lat  = position.coords.latitude;
+        user_long = position.coords.longitude;
+        console.log(user_lat+" "+user_long);
+        setUserPositionMarker();
+      }, function(){
+        setUserPositionMarker();
+      });
+
 
 	/* -------  Définition des attributs des icones  ------- */
 		var LeafIcon = L.Icon.extend({
@@ -122,9 +167,19 @@ li a:hover:not(.active) {
 	};
 	
 	/*  -------  Positionnement d'icones d'activités ==> Dévelloper une fonction qui parcoure la DB ------- */
-	L.marker([50.467386, 4.857674], {icon: sportsICO}).addTo(map).bindPopup("Activité sportive.");
-	L.marker([50.465405, 4.862437], {icon: cultureICO}).addTo(map).bindPopup("Activité culturelle.");
-	L.marker([50.46369, 4.859101], {icon: gamesICO}).addTo(map).bindPopup("Activité récréative.");
+  DBRepository.getParticipations(1, function(participations){
+    participations.forEach(participation => {
+      DBRepository.getEvent(participation.event_id, function(event_item){
+        let event_icon = cultureICO;
+        if(event_item.category_type === "Sport") {
+          event_icon = sportsICO;
+        } else if(event_item.category_type === "Jeux") {
+          event_icon = gamesICO;
+        }
+        L.marker([50.467386, 4.857674], {icon: spevent_iconortsICO}).addTo(map).bindPopup(event_item.title);
+      });
+    });
+  });
 
 
 	/*  -------  Choix des catégories ------- */

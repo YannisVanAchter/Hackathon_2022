@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -18,7 +19,7 @@
 
 		<style>
 		body {font-family: Roboto, sans-serif; font-size: 22px;}
-		form {border: 4px solid #green;}
+		form {border: 4px solid green;}
 
 		/* -------------   Header et logo   -------- */
 
@@ -147,7 +148,6 @@
 	</head>
 <body>
 
-	<form action="/action_page.php" method="post">
 
 <!-- **********   TITLE/LOGO BANNER **********  -->	
 
@@ -168,16 +168,17 @@
 
 <!-- **********   LOGIN FIELDS **********  -->
 
-	<div class="container">
-		<label for="email"><b>Entrez votre adresse e-mail : </b></label><br />
-			<input type="email" placeholder="exemple@gmail.com" name="email" required><br />
-		<label for="psw"><b>Entrez votre mot de passe : </b></label><br />
-			<input type="password" placeholder="Votre mot de passe" name="psw" required><br />
-		<button type="submit" ><a href="main.html">Connexion</a></button><br />
-		<label>
-		  <input type="checkbox" checked="checked" name="remember"> Me garder connecté
-		</label>
-	</div>
+  <form id="login_form">
+	  <div class="container">
+	  	<label for="email"><b>Entrez votre adresse e-mail : </b></label><br />
+	  		<input type="email" placeholder="exemple@gmail.com" name="email" required><br />
+	  	<label for="psw"><b>Entrez votre mot de passe : </b></label><br />
+	  		<input type="password" placeholder="Votre mot de passe" name="psw" required><br />
+	  	<button type="submit" id="login_button"><a href="main.html">Connexion</a></button><br />
+	  	<label>
+	  	  <input type="checkbox" checked="checked" name="remember"> Me garder connecté
+	  	</label>
+	  </div>
 
 	  <div class="container" style="background-color:#f1f1f1">
 		<!--
@@ -189,6 +190,37 @@
 
 	  </div>
 	</form>
+  <script src="../js/Adapters/DBRepository.js">
+    function processLoginForm(e) {
+      console.log("ewo");
+      sessionStorage.setItem("lastname", "Smith");
+      if (e.preventDefault) e.preventDefault();
+
+      let email = document.getElementById("login_form").elements["email"];
+      let pwd = document.getElementById("login_form").elements["pwd"];
+
+      console.log(email);
+      console.log(pwd);
+      DBRepository.doesLoginExist(email, function(doesExist, founduser){
+        console.log(doesExist);
+        window.sessionStorage.setItem("user_id", founduser.user_id);
+        window.location.href = "./main.html";
+        //redirect
+      });
+
+
+
+      // You must return false to prevent the default form behavior
+      return false;
+    }
+
+    var form = document.getElementById('login_form');
+    if (form.attachEvent) {
+        form.attachEvent("submit", processLoginForm);
+    } else {
+        form.addEventListener("submit", processLoginForm);
+    }
+  </script>
 <!-- --------------------------  FOOTER   -------------------------- -->
 <div class="mt-5 p-4 bg-dark text-white text-center">
   	<div class="row">
@@ -233,5 +265,6 @@
 		The Whovians copyright 2022
 	</div>
 </div>
+
 </body>
 </html>
