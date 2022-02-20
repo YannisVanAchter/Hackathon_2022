@@ -3,7 +3,7 @@ class User{
     this.fullname = _fullname;
     this.email = _email;
     this.password = _password;
-    this.imagepath = _imagepath;
+    this.avatar_filename = _imagepath;
     this.user_id = _user_id;
   }
 
