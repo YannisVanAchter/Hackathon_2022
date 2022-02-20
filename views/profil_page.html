@@ -31,20 +31,8 @@
 		}
 
 		.btn-calendrier{
-			position: right;
+			display: inline-block ;
 
-		}
-
-
-		/*  ------------- Champs Email + Password   ------ */
-		input[type=email], input[type=password] {
-		  width: 60%;
-		  
-		  padding: 12px 20px;
-		  margin: 8px 0;
-		  display: inline-block ;
-		  border: 1px solid #ccc;
-		  box-sizing: border-box;
 		}
 
 		button {
@@ -77,7 +65,7 @@
 		  width: auto;
 		  padding: 5px 5px;
 		  background-color: #f44336;
-		  float: right;
+		  float: center;
 		  padding-top: 16px;
 		  font-size: 18px;
 		  border-radius: 15px;
@@ -94,27 +82,38 @@
 				}
 			}
 		
-		table, th, td {
-			float: center;
-  			border:1px solid black;
+		table {
+			margin-left: auto; 
+     		margin-right: auto;
+			width: 100%;
+			border:1px dotted black;
+			}
 
-		}
+		th, td {
+			width:auto;
+			padding: 15px;
+			text-align: center;
+			border:1px dotted black;
+			}
 
-
+		td:hover {background-color: #D6EEEE;}
 		</style>
 	</head>
 <body>
 
 <!-- **********   TITLE/LOGO BANNER **********  -->	
 	<header class="header"	>
-		<div class="imgcontainer">
-			<img src="../img/logo_squared.png" alt="Logo" class="logo">
-		</div>
-		<div class="btn-calendrier">
-			<a href="main.html">
-				<button type="button" class="btn navbar-btn"> <img src="../img/calendrier.png" height="80" width="80" />
-				</button>
-			</a>
+		<div class="navbar-header">
+			<div class="imgcontainer">
+				<img src="../img/logo_squared.png" alt="Logo" class="logo">
+			</div>
+		
+			<div class="btn-calendrier">
+				<a href="main.html">
+					<button type="button" class="btn navbar-btn"> <img src="../img/calendrier.png" height="80" width="80" />
+					</button>
+				</a>
+			</div>
 		</div>
 	</header>
 <!-- **********   AVATAR **********  -->
@@ -140,42 +139,43 @@
 	</div>	
 
 <!-- **********  FOOTER  ********** -->
-<div class="mt-5 p-4 bg-dark text-center">
-  	<div class="row">
-		<div class="col-sm p-4 bg-primary">
+<!-- --------------------------  FOOTER   -------------------------- -->
+<div class="mt-2 p-1 text-center">
+	<div class="row">
+		<div class="col-sm p-1">
 			<div class="trow">
-				Contact			
+				Contact
 			</div>
 			<div class="row">
-				<div class="col-sm p-3 bg-primary">
+				<div class="col-sm p-1">
 					Téléphone
 					<br />
 					01/234.56.78
 				</div>
-				<div class="col-sm p-3 bg-primary">
+				<div class="col-sm p-1">
 					Siège social
 					<br />
 					Rue de l'espoir 1, 5000 Namur
-				</div>		
+				</div>
 			</div>
 		</div>
-		<div class="col-sm p-5 bg-primary text-white">
+		<div class="col-sm p-1">
 			<div class="row">
-				<div class="col-sm p-3 bg-primary">
+				<div class="col-sm p-1">
 					<button type="button" class="simplebutton">
 						Sitemap
 					</button>
 				</div>
-				<div class="col-sm p-3 bg-primary text-white">
+				<div class="col-sm p-1">
 					<button type="button" class="simplebutton">
 						Conditions d'utilisations
 					</button>
 				</div>
-				<div class="col-sm p-3 bg-primary text-white">
+				<div class="col-sm p-1">
 					<button type="button" class="simplebutton">
 						Politique de vie privée
 					</button>
-				</div>		
+				</div>
 			</div>
 		</div>
 	</div>
@@ -183,5 +183,6 @@
 		The Whovians copyright 2022
 	</div>
 </div>
+
 </body>
 </html>
