@@ -144,33 +144,13 @@
 						</div>
 					
 						<div id="agenda_mainpage">
-							<!-- JavaScript fonctionne à partir de 
-					                dimanche: dimanche est donc mit à la fin 
-					                avec la balise de classe d_1 -->
-							<h1 class="d_2">Lundi
-								<p class="a_2"></p>
-							</h1>
-							<h1 class="d_3">Mardi
-								<p class="a_3"></p>
-							</h1>
-							<h1 class="d_4">Mercredi
-								<p class="a_4"></p>
-							</h1>
-							<h1 class="d_5">Jeudi
-								<p class="a_5"></p>
-							</h1>
-							<h1 class="d_6">Vendredi
-								<p class="a_6"></p>
-							</h1>
-							<h1 class="d_7">Samedi
-								<p class="a_6"></p>
-							</h1>
-							<h1 class="d_1">Dimanche
-								<p class="a_1"></p>
-							</h1>
-							<div id="details_events">
-									TEST
-							</div>
+							<h1 id="agenda_lundi">Lundi</h1>
+							<h1 id="agenda_mardi">Mardi</h1>
+							<h1 id="agenda_mercredi">Mercredi</h1>
+							<h1 id="agenda_jeudi">Jeudi</h1>
+							<h1 id="agenda_vendredi">Vendredi</h1>
+							<h1 id="agenda_samedi">Samedi</h1>
+							<h1 id="agenda_dimanche">Dimanche</h1>
 						</div>
 						<script src="../js/Model/EventParticipation.js"></script>
 						<script src="../js/Adapters/DBRepository.js"></script>
@@ -309,9 +289,18 @@
 			  console.log(participation_list.length);
         participation_list.forEach(participation => {
 					DBRepository.getEvent(participation.event_id, function(event_item){
-						//TODO check with dates
-            
-				    document.getElementById("agenda_mainpage").innerHTML += "<p>"+event_item.title+" - "+event_item.begindate+"</p><br/>"
+						let eventdate_day = new Date(event_item.begindate).getDay();
+            let agendapositionelement = null;
+            switch(eventdate_day){
+              case 0: agendapositionelement = document.getElementById("agenda_dimanche"); break;
+              case 1: agendapositionelement = document.getElementById("agenda_lundi"); break;
+              case 2: agendapositionelement = document.getElementById("agenda_mardi"); break;
+              case 3: agendapositionelement = document.getElementById("agenda_mercredi"); break;
+              case 4: agendapositionelement = document.getElementById("agenda_jeudi"); break;
+              case 5: agendapositionelement = document.getElementById("agenda_vendredi"); break;
+              case 6: agendapositionelement = document.getElementById("agenda_samedi"); break;
+            }
+				    agendapositionelement.innerHTML += "<p>"+event_item.title+" - "+event_item.begindate+"</p><br/>"
 			    });
 		    });
       });
