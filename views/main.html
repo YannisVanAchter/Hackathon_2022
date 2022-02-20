@@ -208,9 +208,10 @@
 			zoomOffset: -1
 		}).addTo(map);
 		/*  -------  VOUS ETES ICI ------- */
-		var marker = L.marker([50.465826, 4.85769]).addTo(map)
-			.bindPopup('<b>Bonjour $name</b><br />Vous êtes ici.').openPopup();
-		/* -------  Définition des attributs des icones  ------- */
+		
+
+
+    /* -------  Définition des attributs des icones  ------- */
 		var LeafIcon = L.Icon.extend({
 			options: {
 				shadowUrl: 'leaf-shadow.png',
@@ -225,14 +226,14 @@
 		var sportsICO = new LeafIcon({ iconUrl: '../img/sportsICO.jpg' }),
 			cultureICO = new LeafIcon({ iconUrl: '../img/cultureICO.png' }),
 			gamesICO = new LeafIcon({ iconUrl: '../img/gamesICO.jpg' });
-
+//
 		L.icon = function (options) {
 			return new L.Icon(options);
 		};
 		/*  -------  Positionnement d'icones d'activités ==> Dévelloper une fonction qui parcoure la DB ------- */
-		L.marker([50.467386, 4.857674], { icon: sportsICO }).addTo(map).bindPopup("Activité sportive.");
-		L.marker([50.465405, 4.862437], { icon: cultureICO }).addTo(map).bindPopup("Activité culturelle.");
-		L.marker([50.46369, 4.859101], { icon: gamesICO }).addTo(map).bindPopup("Activité récréative.");
+		//L.marker([50.467386, 4.857674], { icon: sportsICO }).addTo(map).bindPopup("Activité sportive.");
+		//L.marker([50.465405, 4.862437], { icon: cultureICO }).addTo(map).bindPopup("Activité culturelle.");
+		//L.marker([50.46369, 4.859101], { icon: gamesICO }).addTo(map).bindPopup("Activité récréative.");
 		/*  -------  Choix des catégories ------- */
 		/*
 		var
@@ -264,9 +265,9 @@
 		}
 
 	/* -------  Définition des 3 icones de catégories  ------- */
-	let sportsICO = new LeafIcon({iconUrl: '../img/sportsICO.jpg'});
-  let cultureICO = new LeafIcon({iconUrl: '../img/cultureICO.png'});
-  let gamesICO = new LeafIcon({iconUrl: '../img/gamesICO.jpg'});
+	let a_sportsICO = new LeafIcon({iconUrl: '../img/sportsICO.jpg'});
+  let a_cultureICO = new LeafIcon({iconUrl: '../img/cultureICO.png'});
+  let a_gamesICO = new LeafIcon({iconUrl: '../img/gamesICO.jpg'});
 
 
 	L.icon = function (options) {
@@ -278,11 +279,11 @@
     console.log(event_list.length);
     event_list.forEach(event_item => {
       console.log(event_item.category_type);
-      const event_icon = new LeafIcon({iconUrl: '../img/cultureICO.png'});
-        if(event_item.category_type === "Sport") {
-          event_icon = new LeafIcon({iconUrl: '../img/sportsICO.jpg'});
-        } else if(event_item.category_type === "Jeux") {
-          event_icon = new LeafIcon({iconUrl: '../img/gamesICO.jpg'});
+      let event_icon = a_cultureICO;
+        if(event_item.type === "Sport") {
+          event_icon = a_sportsICO;
+        } else if(event_item.type === "Jeux") {
+          event_icon = a_gamesICO;
         }
         //http://open.mapquestapi.com/geocoding/v1/address?key=KEY&location=Washington,DC
         var xmlHttp = new XMLHttpRequest();
@@ -290,7 +291,8 @@
         xmlHttp.send( null );
         const event_lat = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lat;
         const event_lng = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lng;
-        L.marker([event_lat, event_lng], {icon: event_icon}).addTo(map).bindPopup(event_item.title);
+        L.marker([event_lat, event_lng], {icon: event_icon}).addTo(map).bindPopup("<h2>"+event_item.title + '</h2><br/>' + event_item.begindate +" - "+ event_item.endingdate +'<br/>'+ event_item.description
+        + '<br/><button>Je participe</button>' + '<button>Participants</button>');
     });
   });
 
@@ -330,7 +332,7 @@ map.on('click', onMapClick);
 
 	</script>
 <script>
-	    < !--jQuery(necessary for Bootstrap's JavaScript plugins) -->
+	    <!--jQuery(necessary for Bootstrap's JavaScript plugins) -->
 				< script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" ></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
