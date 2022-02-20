@@ -187,7 +187,7 @@ class DBRepository{
   // =========== USERS =============================
   static addUser(userObject, callback) {
     if(typeof userObject.user_id === 'undefined' || userObject.user_id === null){
-      userObject.user_id = Random.getRandomInt(6700);
+      userObject.user_id = Math.floor(Math.random() * 6700);
     }
     let userObject_data = {user_id: userObject.user_id, fullname: userObject.fullname, email: userObject.email,
        password: userObject.password, avatar_filename: userObject.imagepath}
@@ -305,7 +305,7 @@ class DBRepository{
   //  =========== EVENTS =============================
   static addEvent(eventObject, callback) {
     if(typeof eventObject.event_id === 'undefined' || eventObject.event_id === null){
-      eventObject.user_id = Random.getRandomInt(6700);
+      eventObject.user_id = Math.floor(Math.random() * 6700);
     }
     let eventObject_data = {title: eventObject.title, begindate: eventObject.begindate, endingdate: eventObject.endingdate, location: eventObject.location, description: eventObject.description, category: eventObject.category, type: eventObject.category_type, event_id : eventObject.event_id}
     let DBOpenRequest = window.indexedDB.open(DBRepository.getDBName(), 4);
@@ -418,7 +418,8 @@ class DBRepository{
   //  =========== EVENT PARTICIPATION =============================
   static addEventParticipation(addEventParticipationObject, callback) {
     if(typeof addEventParticipationObject.eventparticipation_id === 'undefined' || addEventParticipationObject.eventparticipation_id === null){
-      eventObject.user_id = Random.getRandomInt(6700);
+      addEventParticipationObject.eventparticipation_id = Math.floor(Math.random() * 6700);
+      console.log(Math.floor(Math.random() * 6700));
     }
     let eventParticipationObject_data = {user_id: addEventParticipationObject.user_id, event_id: addEventParticipationObject.event_id, eventparticipation_id: addEventParticipationObject.eventparticipation_id}
     let DBOpenRequest = window.indexedDB.open(DBRepository.getDBName(), 4);

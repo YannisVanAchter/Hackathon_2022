@@ -38,7 +38,9 @@
                     <h3 class="semaine"></h3>
                 </div>
                 <i class="fas fa-angle-right next" id="nextWeek"></i>
-                <script src="../js/Adapters/DBRepository.js ../js/Model/EventParticipation.js">
+                <script src="../js/Adapters/DBRepository.js ../js/Model/EventParticipation.js"></script>
+                <script defer>
+
                     // import DBRepository from '../Adapters/DBRepository'
             
                     // function actived to write the days of the week
@@ -60,9 +62,11 @@
                         // met à jour le corp de l'agenda (blanc)
                         for (let i = 1; i<8 ; i++) {
                             // ajout des jours
-                            const day_tag = document.querySelector('.d_'+i);
+                            const day_tag = document.getElementsByClassName('d_'+i);
+                            console.log(day_tag);
                             if (i-1 == actualDate.getDay()) {
-                                day_tag.classList.add('current-date');
+                                console.log(day_tag[0])
+                                //day_tag['0'].classList.add('current-date');
                             }
             
                             // ajout des evènements sur l'affichage
@@ -115,29 +119,29 @@
             
                     function prevW(event) { 
                         console.log('prevW')
-                        event.preventDefault();
+                        // event.preventDefault();
                         let date = new Date();
-                        date.setDate()-= 7;
+                        date -= 7*24*60*60*1000;
                         writeWeek(date);
                     }
             
                     function nextW(event) {
                         console.log('NewtW')
-                        event.preventDefault();
+                        // event.preventDefault();
                         let date = new Date();
-                        date = new Date(date - 21*24*60*60);
+                        date += 7*24*60*60*1000;
                         writeWeek(date);
                     }
             
                     function actualW(event){
-                        event.preventDefault();
+                        // event.preventDefault();
                         let date = new Date();
                         writeWeek(date);
                     }
             
                     // set connection to div with id 'contrat_mariage' for all tag inside
-                    document.getElementById("prevWeek").addEventListener("click", prevW);
-                    document.getElementById("nextWeek").addEventListener("click", nextW);
+                    document.getElementById("prevWeek").addEventListener("click", prevW());
+                    document.getElementById("nextWeek").addEventListener("click", nextW());
                     // remplace agenda par l'id de la balise HTML depuis l'affichage de la map
                     // document.getElementById("agenda").addEventListener("click", actualW);
                 </script>

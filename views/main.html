@@ -70,7 +70,7 @@
 			transform: translateX(100%);
 		}
 
-		#sidebar. {
+		#sidebar.close {
 			transform: translateX(100%);
 		}
 
@@ -90,36 +90,35 @@
 			height: 100%;
 		}
 
+		/*
 		.leaflet-container {
-			/*
 			display: block;
 			width: 85%;
-			*/
 			}
+		*/
 
 	</style>
 
-
-
-
 </head>
 <body>
+	<nav class="navbar bg-navbar" style="background-color:#ccffcc;">
+		<div class="container">
+			<div class="navbar-header">
+			  <a class="navbar-brand" href="#">
+				  <img src="../img/logo_squared.png" width="70" height="70" alt="">
+			  </a>
+			  <span class="nav navbar-nav pull-xs-right">
+				<a href="profil_page.html">
+					<button type="button" class="btn navbar-btn"> <img src="../img/avatar.png" height="80" width="80" />
+					</button>
+				</a>
+			</nav>
+			</div>
+			
+		  </div>
+	</nav>
 
-	<div class="container">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="../index.html">
-				<img src="../img/logo_squared.png" width="70" height="70" alt="">
-			</a>
-		</div>
-		<nav class="navbar navbar-expand-sm justify-content-right">
 
-			<button class="btn navbar-btn">Créer un évenment</button>
-			<a href="profil_page.html">
-			<button type="button" class="btn navbar-btn"> <img src="../img/avatar.png" height="80" width="80" />
-			</button>
-			</a>
-		</nav>
-	</div>
 
 	<!-- <div id="header">
 		
@@ -137,40 +136,27 @@
 						<div class="headCalendar">
 							<i class="fas fa-angle-left prev" id="prevWeek"></i>
 							<div class="row">
-								<h1>Semaine :</h1>
+								<h1>Semaine du 21/02 au 27/02</h1>
 								<h3 class="semaine"></h3>
 							</div>
 							<i class="fas fa-angle-right next" id="nextWeek"></i>
 						</div>
 					
-						<div id="contrat_mariage">
-							<!-- JavaScript fonctionne à partir de 
-					                dimanche: dimanche est donc mit à la fin 
-					                avec la balise de classe d_1 -->
-							<h1 class="d_2">Lundi
-								<p class="a_2"></p>
-							</h1>
-							<h1 class="d_3">Mardi
-								<p class="a_3"></p>
-							</h1>
-							<h1 class="d_4">Mercredi
-								<p class="a_4"></p>
-							</h1>
-							<h1 class="d_5">Jeudi
-								<p class="a_5"></p>
-							</h1>
-							<h1 class="d_6">Vendredi
-								<p class="a_6"></p>
-							</h1>
-							<h1 class="d_7">Samedi
-								<p class="a_6"></p>
-							</h1>
-							<h1 class="d_1">Dimanche
-								<p class="a_1"></p>
-							</h1>
-							<div id="details_events">
-									TEST
-							</div>
+						<div id="agenda_mainpage">
+							<h2>Lundi</h2>
+              <p id="agenda_lundi"></p>
+							<h2>Mardi</h2>
+              <p id="agenda_mardi"></p>
+							<h2>Mercredi</h2>
+              <p id="agenda_mercredi"></p>
+							<h2>Jeudi</h2>
+              <p id="agenda_jeudi"></p>
+							<h2>Vendredi</h2>
+              <p id="agenda_vendredi"></p>
+							<h2>Samedi</h2>
+              <p id="agenda_samedi"></p>
+							<h2 style="color: red;">Dimanche</h2>
+              <p id="agenda_dimanche"></p>
 						</div>
 						<script src="../js/Model/EventParticipation.js"></script>
 						<script src="../js/Adapters/DBRepository.js"></script>
@@ -216,6 +202,7 @@
 		
 		let user_long = 4.85769;
 		let user_lat = 50.465826;
+    let current_user_location_address = "";
 		let setuserPositionMarker = function(){
 			DBRepository.getUser(1, function(user){
 			var userAvatarIcon = new LeafIcon({iconUrl: '../img/'+user.avatar_filename});
@@ -228,6 +215,13 @@
 		    user_lat = position.coords.latitude;
 		    user_long = position.coords.longitude;
 		    console.log(user_lat+" "+user_long);
+        var xmlHttp = new XMLHttpRequest();
+        //http://www.mapquestapi.com/geocoding/v1/reverse?key=RaEacuhNAZEHQ3ArwIntrabbpiq9aHvT&location=30.333472,-81.470448&includeRoadMetadata=true&includeNearestIntersection=true
+        xmlHttp.open( "GET", "http://www.mapquestapi.com/geocoding/v1/reverse?key=RaEacuhNAZEHQ3ArwIntrabbpiq9aHvT&location="+user_lat+","+user_long+"&includeRoadMetadata=true&includeNearestIntersection=true", false ); // false for synchronous request
+        xmlHttp.send( null );
+        let location_object = JSON.parse(xmlHttp.responseText).results[0].locations[0];
+        current_user_location_address = location_object.street +", "+ location_object.adminArea1Type;
+        console.log(current_user_location_address);
 		    setuserPositionMarker(); 
 		}, function(){setuserPositionMarker();}, {timeout:10000});
 
@@ -247,34 +241,9 @@
 		var sportsICO = new LeafIcon({ iconUrl: '../img/sportsICO.jpg' }),
 			cultureICO = new LeafIcon({ iconUrl: '../img/cultureICO.jpg' }),
 			gamesICO = new LeafIcon({ iconUrl: '../img/gamesICO.jpg' });
-//
 		L.icon = function (options) {
 			return new L.Icon(options);
 		};
-		/*  -------  Positionnement d'icones d'activités ==> Dévelloper une fonction qui parcoure la DB ------- */
-		//L.marker([50.467386, 4.857674], { icon: sportsICO }).addTo(map).bindPopup("Activité sportive.");
-		//L.marker([50.465405, 4.862437], { icon: cultureICO }).addTo(map).bindPopup("Activité culturelle.");
-		//L.marker([50.46369, 4.859101], { icon: gamesICO }).addTo(map).bindPopup("Activité récréative.");
-		/*  -------  Choix des catégories ------- */
-		/*
-		var
-			sportss    = L.marker([50.467386, 4.857674], {icon: sportsICO}).addTo(map).bindPopup("Activité sportive.");
-			cult    = L.marker([50.465405, 4.862437], {icon: cultureICO}).addTo(map).bindPopup("Activité culturelle.");
-			gamess    = L.marker([50.46369, 4.859101], {icon: gamesICO}).addTo(map).bindPopup("Activité récréative.");
-		Instead of adding them directly to the map, you can do the following, using the LayerGroup class:
-		
-		var sp = L.layerGroup([sportss]);
-		var cu = L.layerGroup([cult]);
-		var ga = L.layerGroup([gamess]);
-			
-			var overlayMaps = {
-			"Sports": sp
-			"Culture": cu
-			"Jeux": ga
-		};
-			
-			L.control.layers(overlayMaps).addTo(map);
-		*/
 		/*  -------  Fonction affichant les coordonnées de l'endroit cliqué ------- */
 		var popup = L.popup();
 
@@ -286,9 +255,9 @@
 		}
 
 	/* -------  Définition des 3 icones de catégories  ------- */
-	let a_sportsICO = new LeafIcon({iconUrl: '../img/sportsICO.jpg'});
-  	let a_cultureICO = new LeafIcon({iconUrl: '../img/cultureICO.jpg'});
-  	let a_gamesICO = new LeafIcon({iconUrl: '../img/gamesICO.jpg'});
+	let a_sportsICO = new LeafIcon({iconUrl: '../img/sportsICO.png'});
+  	let a_cultureICO = new LeafIcon({iconUrl: '../img/cultureICO.png'});
+  	let a_gamesICO = new LeafIcon({iconUrl: '../img/gamesICO.png'});
 
 
 	L.icon = function (options) {
@@ -298,6 +267,7 @@
   function jeparticipe(event_id_a){
     console.log("je participe " + event_id_a);
     DBRepository.addEventParticipation({user_id: 1, event_id: event_id_a, eventparticipation_id: null}, function(){
+      refreshAgenda();
     });
   }
   function voirparticipants(){
@@ -305,6 +275,7 @@
   }
 
 	/*  -------  Positionnement d'icones d'activités ==> Dévelloper une fonction qui parcoure la DB ------- */
+  let marker_list = [];
   DBRepository.getAllEvents(function(event_list){
     console.log(event_list.length);
     event_list.forEach(event_item => {
@@ -321,39 +292,63 @@
         xmlHttp.send( null );
         const event_lat = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lat;
         const event_lng = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lng;
-        L.marker([event_lat, event_lng], {icon: event_icon}).addTo(map).bindPopup("<h2>"+event_item.title + '</h2><br/>' + event_item.begindate +" - "+ event_item.endingdate +'<br/>'+ event_item.description
-        + '<div id=\"participant_div\"></div><br/><button onClick=\"jeparticipe('+event_item.event_id+')\">Je participe</button>' + '<button style=\"margin-left:5px;\">Participants</button>');
-    });
+        const event_marker = L.marker([event_lat, event_lng], {icon: event_icon}).addTo(map).bindPopup("<h2>"+event_item.title + '</h2><br/>' + event_item.begindate +" - "+ event_item.endingdate +'<br/>'+ event_item.description
+        + '<div id=\"participant_div\"></div><br/><button onClick=\"jeparticipe('+event_item.event_id+')\">Je participe</button>'/* + '<button style=\"margin-left:5px;\">Participants</button>'*/);
+        marker_list.push({event_id: event_item.event_id, marker: event_marker});
+      });
   });
 
 
   	/*  -------  AFFICHAGE/POPULATE DU CALENDRIER DANS LA SIDEBAR ------- */
-		DBRepository.getParticipations(1, function (event_list) {
-			console.log(event_list.length);
-			event_list.forEach(event_item => {
-				console.log(event_item.category_type);
-					DBRepository.getEvent(event_item.event_id, function(a){
-						if (a.begindate == currentdate) {
-							document.getElementsById.add(event_data.title)
+    function selectMarker(event_id, event_location){
+      marker_list.forEach(marker_item => {
+        if(marker_item.event_id === event_id){
+          marker_item.marker.openPopup();
+        }
+      });
+      //http://www.mapquestapi.com/directions/v2/route?key=RaEacuhNAZEHQ3ArwIntrabbpiq9aHvT&from=Clarendon Blvd,Arlington,VA&to=2400+S+Glebe+Rd,+Arlington,+VA
+      var xmlHttp = new XMLHttpRequest();
+      //xmlHttp.open( "GET", "http://www.mapquestapi.com/directions/v2/route?key=RaEacuhNAZEHQ3ArwIntrabbpiq9aHvT&from="+encodeURIComponent(current_user_location_address)+"&to="+encodeURIComponent(event_location), false ); // false for synchronous request
+      ////console.log("http://www.mapquestapi.com/directions/v2/route?key=RaEacuhNAZEHQ3ArwIntrabbpiq9aHvT&from="+current_user_location_address+"&to="+event_location);
+      //xmlHttp.send( null );
+      //console.log(xmlHttp.responseText);
+      //let location_object = JSON.parse(xmlHttp.responseText).results[0];
+      //console.log(location_object.length);
 
-						}
-
-
-				document.getElementsById.add(event_data.title)
-			});
-		});
+    }
+    function refreshAgenda(){
+      document.getElementById("agenda_dimanche").innerHTML="";
+      document.getElementById("agenda_lundi").innerHTML="";
+      document.getElementById("agenda_mardi").innerHTML="";
+      document.getElementById("agenda_mercredi").innerHTML="";
+      document.getElementById("agenda_jeudi").innerHTML="";
+      document.getElementById("agenda_vendredi").innerHTML="";
+      document.getElementById("agenda_samedi").innerHTML="";
+      DBRepository.getParticipations(1, function (participation_list) {
+			  console.log(participation_list.length);
+        participation_list.forEach(participation => {
+					DBRepository.getEvent(participation.event_id, function(event_item){
+						let eventdate_day = new Date(event_item.begindate).getDay();
+            let agendapositionelement = null;
+            switch(eventdate_day){
+              case 4: agendapositionelement = document.getElementById("agenda_dimanche"); break;
+              case 5: agendapositionelement = document.getElementById("agenda_lundi"); break;
+              case 6: agendapositionelement = document.getElementById("agenda_mardi"); break;
+              case 0: agendapositionelement = document.getElementById("agenda_mercredi"); break;
+              case 1: agendapositionelement = document.getElementById("agenda_jeudi"); break;
+              case 2: agendapositionelement = document.getElementById("agenda_vendredi"); break;
+              case 3: agendapositionelement = document.getElementById("agenda_samedi"); break;
+            }
+				    agendapositionelement.innerHTML += "<p onClick='selectMarker("+event_item.event_id+", \""+event_item.location+"\")'>"+event_item.title+" - "+event_item.begindate+"</p><br/>"
+			    });
+		    });
+      });
+    }
+    refreshAgenda(); // execute first time.
+		
 	/*  -------  Fonction affichant les coordonnées de l'endroit cliqué ------- */
-/**/
-var popup = L.popup();
 
-//function onMapClick(e) {
-//    popup
-//        .setLatLng(e.latlng)
-//        .setContent("Vous avez cliqué en : " + e.latlng.toString())
-//        .openOn(map);
-//}
-//
-//map.on('click', onMapClick);
+  var popup = L.popup();
 
 	</script>
 
