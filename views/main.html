@@ -143,7 +143,7 @@
 							<i class="fas fa-angle-right next" id="nextWeek"></i>
 						</div>
 					
-						<div id="contrat_mariage">
+						<div id="agenda_mainpage">
 							<!-- JavaScript fonctionne à partir de 
 					                dimanche: dimanche est donc mit à la fin 
 					                avec la balise de classe d_1 -->
@@ -273,6 +273,7 @@
   function jeparticipe(event_id_a){
     console.log("je participe " + event_id_a);
     DBRepository.addEventParticipation({user_id: 1, event_id: event_id_a, eventparticipation_id: null}, function(){
+      refreshAgenda();
     });
   }
   function voirparticipants(){
@@ -297,27 +298,26 @@
         const event_lat = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lat;
         const event_lng = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lng;
         L.marker([event_lat, event_lng], {icon: event_icon}).addTo(map).bindPopup("<h2>"+event_item.title + '</h2><br/>' + event_item.begindate +" - "+ event_item.endingdate +'<br/>'+ event_item.description
-        + '<div id=\"participant_div\"></div><br/><button onClick=\"jeparticipe('+event_item.event_id+')\">Je participe</button>' + '<button style=\"margin-left:5px;\">Participants</button>');
+        + '<div id=\"participant_div\"></div><br/><button onClick=\"jeparticipe('+event_item.event_id+')\">Je participe</button>'/* + '<button style=\"margin-left:5px;\">Participants</button>'*/);
     });
   });
 
 
   	/*  -------  AFFICHAGE/POPULATE DU CALENDRIER DANS LA SIDEBAR ------- */
-		DBRepository.getParticipations(1, function (event_list) {
-			console.log(event_list.length);
-			event_list.forEach(event_item => {
-				console.log(event_item.category_type);
-					DBRepository.getEvent(event_item.event_id, function(a){
-						if (a.begindate == currentdate) {
-							document.getElementsById.add(event_data.title)
-
-						}
-
-
-				document.getElementsById.add(event_data.title)
-			});
-		});
-  });
+    function refreshAgenda(){
+      DBRepository.getParticipations(1, function (participation_list) {
+			  console.log(participation_list.length);
+        participation_list.forEach(participation => {
+					DBRepository.getEvent(participation.event_id, function(event_item){
+						//TODO check with dates
+            
+				    document.getElementById("agenda_mainpage").innerHTML += "<p>"+event_item.title+" - "+event_item.begindate+"</p><br/>"
+			    });
+		    });
+      });
+    }
+    refreshAgenda(); // execute first time.
+		
 	/*  -------  Fonction affichant les coordonnées de l'endroit cliqué ------- */
 
   var popup = L.popup();
