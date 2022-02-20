@@ -61,8 +61,8 @@
 			/*position: absolute;*/
 			top: 0;
 			right: 0;
-			width: 50px;
-			height: 50px;
+			width: 40px;
+			height: 40px;
 			border-radius: 10%;
 		}
 
@@ -76,7 +76,7 @@
 
 		.sidebar-btn {
 			position: absolute;
-			top: 0;
+			top: 0rem;
 			left: -6rem;
 			width: 6rem;
 			height: 5rem;
@@ -107,7 +107,7 @@
 
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">
+			<a class="navbar-brand" >
 				<img src="../img/logo_squared.png" width="70" height="70" alt="">
 			</a>
 		</div>
@@ -130,7 +130,9 @@
 			<div id="sidebar">
 							<!--  Bouton CALENDRIER  -->
 				<div class="sidebar-btn">
+					<a href="homePage.html" target="calendar">
 						<img src="../img/calendrier.png" alt="Calendrier" class="avatar">
+					</a>
 				</div>
 				<div><!-- AGENDA  -->
 					<div class="calendar">
@@ -263,71 +265,7 @@
 				.openOn(map);
 		}
 
-	/* -------  Définition des 3 icones de catégories  ------- */
-	let sportsICO = new LeafIcon({iconUrl: '../img/sportsICO.jpg'});
-  let cultureICO = new LeafIcon({iconUrl: '../img/cultureICO.png'});
-  let gamesICO = new LeafIcon({iconUrl: '../img/gamesICO.jpg'});
-
-
-	L.icon = function (options) {
-    return new L.Icon(options);
-	};
-	
-	/*  -------  Positionnement d'icones d'activités ==> Dévelloper une fonction qui parcoure la DB ------- */
-  DBRepository.getAllEvents(function(event_list){
-    console.log(event_list.length);
-    event_list.forEach(event_item => {
-      console.log(event_item.category_type);
-      const event_icon = new LeafIcon({iconUrl: '../img/cultureICO.png'});
-        if(event_item.category_type === "Sport") {
-          event_icon = new LeafIcon({iconUrl: '../img/sportsICO.jpg'});
-        } else if(event_item.category_type === "Jeux") {
-          event_icon = new LeafIcon({iconUrl: '../img/gamesICO.jpg'});
-        }
-        //http://open.mapquestapi.com/geocoding/v1/address?key=KEY&location=Washington,DC
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open( "GET", "http://open.mapquestapi.com/geocoding/v1/address?key="+"RaEacuhNAZEHQ3ArwIntrabbpiq9aHvT"+"&location="+encodeURIComponent(event_item.location), false ); // false for synchronous request
-        xmlHttp.send( null );
-        const event_lat = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lat;
-        const event_lng = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lng;
-        L.marker([event_lat, event_lng], {icon: event_icon}).addTo(map).bindPopup(event_item.title);
-    });
-  });
-
-	/*  -------  Choix des catégories ------- */
-/*	
-var 
-    sportss    = L.marker([50.467386, 4.857674], {icon: sportsICO}).addTo(map).bindPopup("Activité sportive.");
-    cult    = L.marker([50.465405, 4.862437], {icon: cultureICO}).addTo(map).bindPopup("Activité culturelle.");
-    gamess    = L.marker([50.46369, 4.859101], {icon: gamesICO}).addTo(map).bindPopup("Activité récréative.");
-Instead of adding them directly to the map, you can do the following, using the LayerGroup class:
-
-var sp = L.layerGroup([sportss]);
-var cu = L.layerGroup([cult]);
-var ga = L.layerGroup([gamess]);
-	
-	var overlayMaps = {
-    "Sports": sp
-	"Culture": cu
-	"Jeux": ga
-};
-	
-	L.control.layers(overlayMaps).addTo(map);
-*/	
-	
-
-	/*  -------  Fonction affichant les coordonnées de l'endroit cliqué ------- */
-var popup = L.popup();
-
-function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent("Vous avez cliqué en : " + e.latlng.toString())
-        .openOn(map);
-}
-
-map.on('click', onMapClick);
-
+		map.on('click', onMapClick);
 	</script>
 <script>
 	    < !--jQuery(necessary for Bootstrap's JavaScript plugins) -->
