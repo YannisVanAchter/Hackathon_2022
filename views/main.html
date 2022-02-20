@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Proche Et Vous</title>
 
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
 			integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
@@ -212,6 +212,22 @@
 		}).addTo(map);
 		/*  -------  VOUS ETES ICI ------- */
 		
+		let user_long = 4.85769;
+		let user_lat = 50.465826;
+		let setuserPositionMarker = function(){
+			DBRepository.getUser(1, function(user){
+			var userAvatarlcon = new Leaflcon({iconUrl: '../img/'+user.avatar_filename});
+			var marker = L.marker([user_lat, user_long], {icon: userAvatarIcon}).addTo(map)
+				.bindPopup('<b>8onjour '+user.fullname+'<b><br />Vous ates ici.').openPopup();
+			});
+		}
+		navigator.geolocation.getcurrentPosition(function(position){
+		user_lat = position.coords.latitude;
+		user_long = position.coords.longitude;
+		console.log(user_lat+" "+user_long);
+		setuserPositionMarker(); 
+		}, function(){setuserPositionMarker();});
+
 
 
     /* -------  Définition des attributs des icones  ------- */
@@ -268,15 +284,24 @@
 		}
 
 	/* -------  Définition des 3 icones de catégories  ------- */
-	let a_sportsICO = new LeafIcon({iconUrl: '../img/sportsICO.jpg'});
+	let a_sportsICO = new LeafIcon({iconUrl: '../img/sportsICO.png'});
   let a_cultureICO = new LeafIcon({iconUrl: '../img/cultureICO.png'});
-  let a_gamesICO = new LeafIcon({iconUrl: '../img/gamesICO.jpg'});
+  let a_gamesICO = new LeafIcon({iconUrl: '../img/gamesICO.png'});
 
 
 	L.icon = function (options) {
     return new L.Icon(options);
 	};
 	
+  function jeparticipe(event_id_a){
+    console.log("je participe " + event_id_a);
+    DBRepository.addEventParticipation({user_id: 1, event_id: event_id_a, eventparticipation_id: null}, function(){
+    });
+  }
+  function voirparticipants(){
+    console.log("participants");
+  }
+
 	/*  -------  Positionnement d'icones d'activités ==> Dévelloper une fonction qui parcoure la DB ------- */
   DBRepository.getAllEvents(function(event_list){
     console.log(event_list.length);
@@ -295,7 +320,7 @@
         const event_lat = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lat;
         const event_lng = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lng;
         L.marker([event_lat, event_lng], {icon: event_icon}).addTo(map).bindPopup("<h2>"+event_item.title + '</h2><br/>' + event_item.begindate +" - "+ event_item.endingdate +'<br/>'+ event_item.description
-        + '<br/><button>Je participe</button>' + '<button>Participants</button>');
+        + '<div id=\"participant_div\"></div><br/><button onClick=\"jeparticipe('+event_item.event_id+')\">Je participe</button>' + '<button style=\"margin-left:5px;\">Participants</button>');
     });
   });
 
@@ -319,6 +344,7 @@
 /*
 var popup = L.popup();
 
+<<<<<<< HEAD
 function onMapClick(e) {
     popup
         .setLatLng(e.latlng)
@@ -332,9 +358,24 @@ map.on('click', onMapClick);
 <script>
 	    <!--jQuery(necessary for Bootstrap's JavaScript plugins) -->
 		< script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" ></script>
+=======
+//function onMapClick(e) {
+//    popup
+//        .setLatLng(e.latlng)
+//        .setContent("Vous avez cliqué en : " + e.latlng.toString())
+//        .openOn(map);
+//}
+//
+//map.on('click', onMapClick);
+
+	</script>
+
+
+	<!--jQuery(necessary for Bootstrap's JavaScript plugins) -->
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" ></script>
+>>>>>>> 10df562e93ebe4d253efaef0a8fe70ca2d561e8d
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
-</script>
 
 
 </body>
