@@ -33,7 +33,6 @@
 
 		#header {
 			height: 10rem;
-			background-color: gray;
 		}
 		.btn navbar-btn{
 			display: inline;
@@ -52,7 +51,7 @@
 			right: 0;
 			width: 20%;
 			height: 100%;
-			background-color: rgb(102, 102, 102);
+			background-color: rgb(138, 216, 233);
 			transition: .5s transform;
 			 z-index: 10000;
 		}
@@ -81,7 +80,7 @@
 			width: 6rem;
 			height: 5rem;
 			border: .1rem solid black;
-			background-color: rgb(204, 103, 103);
+			background-color: rgb(249, 173, 173);
 		}
 
 		#map {
@@ -101,23 +100,33 @@
 
 </head>
 <body>
-	<nav class="navbar bg-navbar">
-		<div class="container">
-			<div class="navbar-header">
-			  <a class="navbar-brand" href="#">
-				  <img src="../img/logo_squared.png" width="70" height="70" alt="">
-			  </a>
-			  <span class="nav navbar-nav pull-xs-right">
-				<button class="btn navbar-btn">CREER UN EVENEMENT</button>
-				<a href="profil_page.html">
-					<button type="button" class="btn navbar-btn"> <img src="../img/avatar.png" height="80" width="80" />
-					</button>
-				</a>
-			</nav>
-			</div>
-			
-		  </div>
-	</nav>
+	
+
+	<div class="topnav">
+		
+		<img src="../img/logo_squared.png" width="70" height="70" alt="">
+		
+		<div class="topnav-right">
+		  <a href="../views/profil_page.html">
+			  <img src="../img/granny-round.png" width="70" height="70" alt="">
+		  </a>
+		</div>
+	  </div>
+
+	<style>
+		.topnav {
+		  	overflow: hidden;
+		  	background-color: #ccffcc;
+		  	padding-top: 10px;
+  			padding-right: 10px;
+  			padding-bottom: 10px;
+  			padding-left: 10px;
+		}
+		
+		.topnav-right {
+		  float: right;
+		}
+	</style>
 
 
 
