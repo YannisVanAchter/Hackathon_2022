@@ -102,7 +102,7 @@ class DBRepository{
 
     let cpt = 0;
     event_data.forEach(event_item => {
-      this.addEvent({title: event_item.title, begindate: event_item.begindate, endingdate: event_item.endingdate, location: event_item.location, description: event_item.description, category: event_item.category, type: event_item.category_type, event_id : event_item.event_id}, function(){
+      this.addEvent({title: event_item.title, begindate: event_item.begindate, endingdate: event_item.endingdate, location: event_item.location, description: event_item.description, category: event_item.category, category_type: event_item.category_type, event_id : event_item.event_id}, function(){
         cpt++;
         if(cpt >= event_data.length){
           callback(true);
