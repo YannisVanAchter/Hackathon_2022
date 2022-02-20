@@ -332,7 +332,7 @@
 			console.log(event_list.length);
 			event_list.forEach(event_item => {
 				console.log(event_item.category_type);
-					DBRepository.getEvent(event_item.event_id, function(a))
+					DBRepository.getEvent(event_item.event_id, function(a){
 						if (a.begindate == currentdate) {
 							document.getElementsById.add(event_data.title)
 
