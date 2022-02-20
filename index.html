@@ -12,6 +12,7 @@
           } else {
             try{
               DBRepository.init(function(success){
+                console.log("init success");
                 if(success){
                   //window.location.href = "./views/login.html";
 
@@ -22,22 +23,34 @@
                       DBRepository.seedEventParticipations(function(eventParticipationSuccess){
                         console.log('eventParticipations initialized');
 
+
+                        //DB Adapter tests :
+                        console.log("Adapter tests ---");
+                        DBRepository.getUser(1, function(user){
+                          console.log(user.fullname)
+                        });
+                        DBRepository.doesLoginExist('l.lantoine@gmail.co.uk', function(doesExist){
+                          console.log("login exists "+doesExist);
+                        });
+                        DBRepository.doesLoginExist('m.antoinette@gmail.com', function(doesExist){
+                          console.log("login exists " + doesExist);
+                        });
+                        DBRepository.getEvent(1, function(event_item){
+                          console.log(">>>event " + event_item.title);
+                        });
+                        DBRepository.getAllEvents(function(event_list){
+                          console.log(">>>event " + event_list.length);
+                        });
+                        DBRepository.getParticipants(1, function(participantsList){
+                          console.log("participants : " + participantsList.length);
+                        });
+                        DBRepository.getParticipations(1, function(participationsList){
+                          console.log("participations : " + participationsList.length);
+                        });
+
                       });
                     });
                   });
-
-                  //DB Adapter tests :
-                  console.log("Adapter tests ---");
-                  DBRepository.getUser(1, function(user){
-                    console.log(user.fullname)
-                  });
-                  DBRepository.doesLoginExist('l.lantoine@gmail.co.uk', function(doesExist){
-                    console.log("antoine "+doesExist);
-                  });
-                  DBRepository.doesLoginExist('m.antoinette@gmail.com', function(doesExist){
-                    console.log("marie " + doesExist);
-                  });
-
 
                 } else {
                   document.getElementById('maintitle').innerHTML = "Une erreure s'est produite ! Réessayer plus tard";

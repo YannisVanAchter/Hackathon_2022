@@ -6,38 +6,10 @@ class DBRepository{
 
   constructor() { }
 
-  //static init(callback){
-  //  this.masterObject = {
-  //    Users : [
-  //      {user_id:1,  fullname:"Marie Antoinette", email:"m.antoinette@gmail.com", password:"thisisatest", avatar_filename:"avatar.png"},
-  //      {user_id:2,  fullname:"Wolf Dancy", email:"wdancy0@guardian.co.uk", password:"thisisatest", avatar_filename:"avatar.png"},
-  //      {user_id:3,  fullname:"Hernando Lloyds", email:"hlloyds1@cnn.com", password:"thisisatest", avatar_filename:"avatar.png"},
-  //      {user_id:4,  fullname:"Chrystel Phipard-Shears", email:"cphipardshears2@moonfruit.com", password:"thisisatest", avatar_filename:"avatar.png"},
-  //      {user_id:5,  fullname:"Catherine Ride", email:"cride3@imgur.com", password:"thisisatest", avatar_filename:"avatar.png"},
-  //      {user_id:6,  fullname:"Garrot Secrett", email:"gsecrett4@fema.gov", password:"thisisatest", avatar_filename:"avatar.png"},
-  //      {user_id:7,  fullname:"Ivan Tarney", email:"itarney5@usda.gov", password:"thisisatest", avatar_filename:"avatar.png"},
-  //      {user_id:8,  fullname:"Agnesse Hallawell", email:"ahallawell6@cdc.gov", password:"thisisatest", avatar_filename:"avatar.png"},
-  //      {user_id:9,  fullname:"Britte Greschke", email:"bgreschke7@amazonaws.com", password:"thisisatest", avatar_filename:"avatar.png"},
-  //      {user_id:10, fullname:"Leonore Hasell", email:"lhasell8@guardian.co.uk", password:"thisisatest", avatar_filename:"avatar.png"},
-  //      {user_id:11, fullname:"Henrie Whelband", email:"hwhelband9@tumblr.com", password:"thisisatest", avatar_filename:"avatar.png"},
-  //      {user_id:12, fullname:"Breanne Cottham", email:"bcotthama@drupal.org", password:"thisisatest", avatar_filename:"avatar.png"},
-  //      {user_id:13, fullname:"Finley Kingman", email:"fkingmanb@timesonline.co.uk", password:"thisisatest", avatar_filename:"avatar.png"},
-  //      {user_id:14, fullname:"Lavina Campe", email:"lcampec@hao123.com", password:"thisisatest", avatar_filename:"avatar.png"},
-  //      {user_id:15, fullname:"Jyoti Tender", email:"jtenderd@aol.com", password:"thisisatest", avatar_filename:"avatar.png"},
-  //      {user_id:16, fullname:"Daryl Collen", email:"dcollene@japanpost.jp", password:"thisisatest", avatar_filename:"avatar.png"},
-  //    ],
-  //    Events : [
-  //      {event_id:1, title:"Promenade du soir", begindate:1645365000, endingdate:1645379400, location:"Rue Godefroid 29, 5000 Namur", description:"Venez on digère ensemble en marchant le long des quais à notre aise.", category:"promenade", category_type:"Sport"},
-  //    ],
-  //    EventParticipations : [
-  //      {eventparticipation_id:1, user_id:1, event_id:1},
-  //    ]
-  //  }
-  //}
-
   static init(callback){
 
     DBRepository.deleteDB(function(deletesuccess){
+      
       if(!deletesuccess){
         throw new Error("Coudln't delete database");
       }
@@ -199,7 +171,7 @@ class DBRepository{
     var req = indexedDB.deleteDatabase(DBRepository.getDBName());
     req.onsuccess = function () {
         // console.log("Deleted database successfully");
-        // callback(true);
+        callback(true);
     };
     req.onerror = function () {
         // console.log("Couldn't delete database");
@@ -371,13 +343,45 @@ class DBRepository{
     };
   }
 
-  static getEvent(event_id, callback) { 
-    if(typeof event_id === 'undefined' || event_id === null){
-      event_id.user_id = Random.getRandomInt(6700);
-    }
-    let eventObject_data = {title: event_id.title, begindate: event_id.begindate, 
-      endingdate: event_id.endingdate, location: event_id.location, description: event_id.description, 
-      category: event_id.category, type: event_id.category_type, event_id : event_id.event_id}
+  static getEvent(event_id, callback) {
+    let DBOpenRequest = window.indexedDB.open(DBRepository.getDBName(), 4);
+    DBOpenRequest.onsuccess = function(event) {
+      //console.log("Database Opened");
+    
+      // store the result of opening the database in the db variable.
+      // This is used a lot below
+      let db = DBOpenRequest.result;
+
+      let transaction = db.transaction(["events"], "readwrite");
+
+      // report on the success of the transaction completing, when everything is done
+      transaction.oncomplete = function(event) {
+        //console.log("transaction complete");
+      };
+
+      transaction.onerror = function(event) {
+        //console.log("error occured");
+      };
+
+      // create an object store on the transaction
+      let objectStore = transaction.objectStore("events");
+
+      // Make a request to add our newItem object to the object store
+      let objectStoreRequest = objectStore.get(event_id);
+
+      objectStoreRequest.onsuccess = function(event) {
+        // report the success of our request
+        // console.log("success objectsotre");
+        callback(event.target.result);
+        db.close();
+      };
+      objectStoreRequest.onerror = function(event){
+        console.log(event);
+      }
+    };
+  }
+
+  static getAllEvents(callback){
     let DBOpenRequest = window.indexedDB.open(DBRepository.getDBName(), 4);
     DBOpenRequest.onsuccess = function(event) {
     console.log("Database Opened");
@@ -401,16 +405,14 @@ class DBRepository{
       let objectStore = transaction.objectStore("events");
 
       // Make a request to add our newItem object to the object store
-      let objectStoreRequest = objectStore.get(eventObject_data);
+      let objectStoreRequest = objectStore.getAll();
 
       objectStoreRequest.onsuccess = function(event) {
         // report the success of our request
-        console.log("success objectsotre.get()");
+        callback(event.target.result);
+        db.close();
       };
     };
-  }
-  static getAllEvents(callback){
-
   }
 
   //  =========== EVENT PARTICIPATION =============================
@@ -455,11 +457,65 @@ class DBRepository{
   }
 
   static getParticipants(event_id, callback){
-
+    let returnList = [];
+    let cpt = 0;
+    DBRepository.getAllEventParticipations(function(eventParticipations_list){
+      eventParticipations_list.forEach(eventParticipation => {
+        if(eventParticipation.event_id === event_id){
+          returnList.push(eventParticipation);
+        }
+      });
+      callback(returnList);
+    });
   }
 
   static getParticipations(user_id, callback){
+    let returnList = [];
+    let cpt = 0;
+    DBRepository.getAllEventParticipations(function(eventParticipations_list){
+      eventParticipations_list.forEach(eventParticipation => {
+        
+        console.log(eventParticipation.user_id);
+        if(eventParticipation.user_id === user_id){
+          returnList.push(eventParticipation);
+        }
+      });
+      callback(returnList);
+    });
+  }
 
+  static getAllEventParticipations(callback){
+    let DBOpenRequest = window.indexedDB.open(DBRepository.getDBName(), 4);
+    DBOpenRequest.onsuccess = function(event) {
+    console.log("Database Opened");
+    
+      // store the result of opening the database in the db variable.
+      // This is used a lot below
+      let db = DBOpenRequest.result;
+
+      let transaction = db.transaction(["eventparticipations"], "readwrite");
+
+      // report on the success of the transaction completing, when everything is done
+      transaction.oncomplete = function(event) {
+        console.log("transaction complete");
+      };
+
+      transaction.onerror = function(event) {
+        console.log("error occured");
+      };
+
+      // create an object store on the transaction
+      let objectStore = transaction.objectStore("eventparticipations");
+
+      // Make a request to add our newItem object to the object store
+      let objectStoreRequest = objectStore.getAll();
+
+      objectStoreRequest.onsuccess = function(event) {
+        // report the success of our request
+        callback(event.target.result);
+        db.close();
+      };
+    };
   }
 
 
