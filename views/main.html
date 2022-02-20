@@ -132,7 +132,7 @@
 				<div class="sidebar-btn">
 						<img src="../img/calendrier.png" alt="Calendrier" class="avatar">
 				</div>
-				<div><!-- AGENDA  -->
+				<div><!---->  --------------- AGENDA  ------------------------- -->
 					<div class="calendar">
 						<div class="headCalendar">
 							<i class="fas fa-angle-left prev" id="prevWeek"></i>
@@ -210,7 +210,7 @@
 		/*  -------  VOUS ETES ICI ------- */
 		
 
-    
+
     /* -------  Définition des attributs des icones  ------- */
 		var LeafIcon = L.Icon.extend({
 			options: {
@@ -291,9 +291,8 @@
         xmlHttp.send( null );
         const event_lat = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lat;
         const event_lng = JSON.parse(xmlHttp.responseText).results[0].locations[0].latLng.lng;
-        L.marker([event_lat, event_lng], {icon: event_icon}).addTo(map).bindPopup(event_item.title + '<br/>' + event_item.begindate +" - "+ event_item.endindate +'<br/>'+ event_item.description
-        + '<br/><button type="button" class="btn btn-primary sidebar-open-button" data = "'
-        + '>Je participe</button>' + '>Participants</button>');
+        L.marker([event_lat, event_lng], {icon: event_icon}).addTo(map).bindPopup("<h2>"+event_item.title + '</h2><br/>' + event_item.begindate +" - "+ event_item.endingdate +'<br/>'+ event_item.description
+        + '<br/><button>Je participe</button>' + '<button>Participants</button>');
     });
   });
 
@@ -332,12 +331,12 @@ function onMapClick(e) {
 map.on('click', onMapClick);
 
 	</script>
-<script>
-	    <!--jQuery(necessary for Bootstrap's JavaScript plugins) -->
-				< script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" ></script>
+
+  
+	<!--jQuery(necessary for Bootstrap's JavaScript plugins) -->
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" ></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
-</script>
 
 
 </body>
