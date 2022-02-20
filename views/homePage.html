@@ -18,9 +18,18 @@
     <![endif]-->
 
     <title>Calendar</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="../styles/sidebar.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"/>
+=======
+    <link rel="stylesheet"
+        href="../styles/sidebar.css"/>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet"/>
+>>>>>>> refs/remotes/origin/main
   </head>
 
   <body>
@@ -30,46 +39,46 @@
                 <i class="fas fa-angle-left prev" id="prevWeek"></i>
                 <div class="row">
                     <h1>Semaine :</h1>
-                    <h3>14/02 - 20/02</h3>
+                    <h3 class="semaine"></h3>
                 </div>
                 <i class="fas fa-angle-right next" id="nextWeek"></i>
             </div>
         
-            <div class="d0">
-                <h2>Lundi</h2>
-                <div class="event"><h4>10h - Scrabble</h4></div>
+            <div id="contrat_mariage">
+                <!-- JavaScript fonctionne à partir de 
+                dimanche: dimanche est donc mit à la fin 
+                avec la balise de classe d_1 -->
+                <h1 class="d_2">Lundi
+                    <p class="a_2"></p>
+                </h1>
+                <h1 class="d_3">Mardi
+                    <p class="a_3"></p>
+                </h1>
+                <h1 class="d_4">Mercredi
+                    <p class="a_4"></p>
+                </h1>
+                <h1 class="d_5">Jeudi
+                    <p class="a_5"></p>
+                </h1>
+                <h1 class="d_6">Vendredi
+                    <p class="a_6"></p>
+                </h1>
+                <h1 class="d_7">Samedi
+                    <p class="a_6"></p>
+                </h1>
+                <h1 class="d_1">Dimanche
+                    <p class="a_1"></p>
+                </h1>
             </div>
-            <div class="d1">
-                <h2>Mardi</h2>
-                <div class="event"></div>
-            </div> 
-            <div class="d3">
-                <h2>Mercredi</h2>
-                <div class="event"><h4>16h - Marche</h4></div>
-            </div>
-            <div class="d4">
-                <h2>Jeudi</h2>
-                <div class="event"></div>
-            </div>
-            <div class="d5">
-                <h2>Vendredi</h2>
-                <div class="event"></div>
-            </div>
-            <div class="d6">
-                <h2>Samedi</h2>
-                <div class="event"></div>
-            </div>
-            <div class="d7">
-                <h2>Dimanche</h2>
-                <div class="event"></div>
-            </div>
+            <script src="../js/Model/EventParticipation.js"></script>
+            <script src="../js/Agenda/agenda.js"></script>
         </div>
     </div>
     
-    <script>
+<!--<script>
         var mondayDate = getMonday(date);
         var sundayDate = date.setDate(mondayDate + 7);
-    </script>
+    </script>-->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
