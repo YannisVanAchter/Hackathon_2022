@@ -8,6 +8,12 @@
 			margin: 1px 0;
 			background-color: #ccffcc;
 		}
+
+	.navbar-header{
+		display: inline-block ;
+
+	}
+
 		.logo {
 			float: center;
 			border: 1px;
@@ -21,29 +27,32 @@
 		  margin: 20px 0 20px 0;
 		}
 		.avatar {
-		  width: 20%;
-		  height: 20%;
+		  width: 10%;
+		  height: 10%;
 		  border-radius: 40%;
 		}
 		/* -------------   FOOTER   -------- */
 		/* -------------   Pages : login, profil_page   -------- */
+
 		.row {
 			/*border: 2px solid yellow;*/
 			padding: 1px;
 			margin: 1px;
-			height: 10%;
+			height: 5%;
 		}
 		.col-sm {
-			border: 2px solid gray;
-			padding: 1px;
-			margin: 1px;
-			height: 10%;
+			/*border: 2px solid gray;*/
+
+			width: auto;
 		}
 		.trow {
 			text-align: center;
-			padding: 2px;
-			margin: 2px;
-		}
-		.mt-5 {
 
+		}
+		.mt-2 {
+			margin-left: auto; 
+     		margin-right: auto;
+			height: 5%;
+			width: 70%;
+			background-color: #ccffcc;
 		}

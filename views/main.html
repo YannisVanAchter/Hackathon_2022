@@ -20,6 +20,7 @@
 			padding: 0;
 			margin: 0;
 			box-sizing: border-box;
+			font-family: "Roboto", sans-serif;
 		}
 
 		html {
@@ -33,7 +34,6 @@
 
 		#header {
 			height: 10rem;
-			background-color: gray;
 		}
 		.btn navbar-btn{
 			display: inline;
@@ -52,9 +52,10 @@
 			right: 0;
 			width: 20%;
 			height: 100%;
-			background-color: rgb(102, 102, 102);
+			background-color: rgb(138, 216, 233);
 			transition: .5s transform;
-			 z-index: 10000;
+			z-index: 10000;
+			border: .1rem solid black;
 		}
 
 		.avatar {
@@ -64,6 +65,10 @@
 			width: 50px;
 			height: 50px;
 			border-radius: 10%;
+			padding-top: 2px;
+  			padding-right: 2px;
+  			padding-bottom: 2px;
+  			padding-left: 2px;
 		}
 
 		#sidebar.open {
@@ -81,13 +86,14 @@
 			width: 6rem;
 			height: 5rem;
 			border: .1rem solid black;
-			background-color: rgb(204, 103, 103);
+			background-color: rgb(138, 216, 233);
 		}
 
 		#map {
 			background-color: whitesmoke;
 			width: 100%;
 			height: 100%;
+			border: .1rem solid black;
 		}
 
 		/*
@@ -101,6 +107,7 @@
 
 </head>
 <body>
+<<<<<<< HEAD
 	<nav class="navbar bg-navbar" style="background-color:#707070;">
 		<div class="container">
 			<div class="navbar-header">
@@ -117,6 +124,35 @@
 			
 		  </div>
 	</nav>
+=======
+	
+
+	<div class="topnav">
+		
+		<img src="../img/logo_squared.png" width="70" height="70" alt="">
+		
+		<div class="topnav-right">
+		  <a href="../views/profil_page.html">
+			  <img src="../img/granny-round.png" width="70" height="70" alt="">
+		  </a>
+		</div>
+	  </div>
+
+	<style>
+		.topnav {
+		  	overflow: hidden;
+		  	background-color: #ccffcc;
+		  	padding-top: 10px;
+  			padding-right: 10px;
+  			padding-bottom: 10px;
+  			padding-left: 10px;
+		}
+		
+		.topnav-right {
+		  float: right;
+		}
+	</style>
+>>>>>>> 789db8da248ce043bbe11eeb1c3c4ded6d0b5d35
 
 
 
@@ -143,19 +179,19 @@
 						</div>
 					
 						<div id="agenda_mainpage">
-							<h1>Lundi</h1>
+							<h2>Lundi</h2>
               <p id="agenda_lundi"></p>
-							<h1>Mardi</h1>
+							<h2>Mardi</h2>
               <p id="agenda_mardi"></p>
-							<h1>Mercredi</h1>
+							<h2>Mercredi</h2>
               <p id="agenda_mercredi"></p>
-							<h1>Jeudi</h1>
+							<h2>Jeudi</h2>
               <p id="agenda_jeudi"></p>
-							<h1>Vendredi</h1>
+							<h2>Vendredi</h2>
               <p id="agenda_vendredi"></p>
-							<h1>Samedi</h1>
+							<h2>Samedi</h2>
               <p id="agenda_samedi"></p>
-							<h1>Dimanche</h1>
+							<h2 style="color: red;">Dimanche</h2>
               <p id="agenda_dimanche"></p>
 						</div>
 						<script src="../js/Model/EventParticipation.js"></script>
