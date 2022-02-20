@@ -30,6 +30,12 @@
 			font-size: 30px;
 		}
 
+		.btn-calendrier{
+			position: right;
+
+		}
+
+
 		/*  ------------- Champs Email + Password   ------ */
 		input[type=email], input[type=password] {
 		  width: 60%;
@@ -87,7 +93,14 @@
 				height: 10%;
 				}
 			}
-			
+		
+		table, th, td {
+			float: center;
+  			border:1px solid black;
+
+		}
+
+
 		</style>
 	</head>
 <body>
@@ -97,6 +110,12 @@
 		<div class="imgcontainer">
 			<img src="../img/logo_squared.png" alt="Logo" class="logo">
 		</div>
+		<div class="btn-calendrier">
+			<a href="main.html">
+				<button type="button" class="btn navbar-btn"> <img src="../img/calendrier.png" height="80" width="80" />
+				</button>
+			</a>
+		</div>
 	</header>
 <!-- **********   AVATAR **********  -->
 	<div class="imgcontainer">
@@ -105,8 +124,19 @@
 	
 <!-- **********   OPTIONS  **********  -->
 	<div class="tableau">
-		<td >
-		
+		<table style="width:30%">
+
+			<tr>
+				<td>Catégories favorites</td>
+				<td>Changer photo</td>
+				<td>Ajouter évenements</td>
+			</tr>
+			<tr>
+				<td>Modifier mes prefs WCAG</td>
+				<td>Changer MDP</td>
+				<td>Supprimer mon compte</td>
+			</tr>
+		</table>
 	</div>	
 
 <!-- **********  FOOTER  ********** -->
