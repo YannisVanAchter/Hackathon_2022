@@ -207,24 +207,26 @@
 			tileSize: 512,
 			zoomOffset: -1
 		}).addTo(map);
+
+
 		/*  -------  VOUS ETES ICI ------- */
 		
 		let user_long = 4.85769;
 		let user_lat = 50.465826;
 		let setuserPositionMarker = function(){
 			DBRepository.getUser(1, function(user){
-			var userAvatarlcon = new Leaflcon({iconUrl: '../img/'+user.avatar_filename});
+			var userAvatarIcon = new LeafIcon({iconUrl: '../img/'+user.avatar_filename});
 			var marker = L.marker([user_lat, user_long], {icon: userAvatarIcon}).addTo(map)
-				.bindPopup('<b>8onjour '+user.fullname+'<b><br />Vous ates ici.').openPopup();
+				.bindPopup('<p>Bonjour '+user.fullname+'<p><br/>Vous êtes ici.').openPopup();
 			});
 		}
-		navigator.geolocation.getcurrentPosition(function(position){
-		user_lat = position.coords.latitude;
-		user_long = position.coords.longitude;
-		console.log(user_lat+" "+user_long);
-		setuserPositionMarker(); 
-		}, function(){setuserPositionMarker();});
-
+		navigator.geolocation.getCurrentPosition(
+      function(position){
+		    user_lat = position.coords.latitude;
+		    user_long = position.coords.longitude;
+		    console.log(user_lat+" "+user_long);
+		    setuserPositionMarker(); 
+		}, function(){setuserPositionMarker();}, {timeout:10000});
 
 
     /* -------  Définition des attributs des icones  ------- */
