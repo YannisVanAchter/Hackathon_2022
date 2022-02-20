@@ -1,3 +1,4 @@
+// import DBRepository from '../Adapters/DBRepository'
 
 // function actived to write the days of the week
 function writeWeek(date){
@@ -23,31 +24,31 @@ function writeWeek(date){
         }
 
         // ajout des evènements sur l'affichage
-        const event_tag = document.querySelector(".a_"+i)
+        const event_tag = document.querySelector(".a_"+i);
         // faire vérifier la db avec Lenaïc
-        DBRepository.getParticipations(1,function (activityUser){
-            let eventListID = [];
-            for (id in activityUser){
-                eventListID.push(id.event_id)
-            }
-            let dateToCheck = new Date(monday.getDay + (i-1))
-            for (activity_id in eventListID){
-                let event = DBRepository.getEvent(activity_id);
-                let createTxtOfEvent = "";
+        DBRepository.DBRepository.getParticipations(1,setHTMLEvent);
+    }
+}
+function setHTMLEvent(activityUser){
+    let eventListID = [];
+    for (id in activityUser){
+        eventListID.push(id.event_id)
+    }
+    let dateToCheck = new Date(monday.getDay + (i-1))
+    for (activity_id in eventListID){
+        let event = DBRepository.DBRepository.getEvent(activity_id);
+        let createTxtOfEvent = "";
 
-                let dateEventBegin = getHourOfDate(event.begindate);
-                if (dateEventBegin === dateToCheck) {
-                    createTxtOfEvent += dateEventBegin;
-                    createTxtOfEvent += '-' + getHourOfDate(event.endDate);
+        let dateEventBegin = getHourOfDate(event.begindate);
+        if (dateEventBegin === dateToCheck) {
+            createTxtOfEvent += dateEventBegin;
+            createTxtOfEvent += '-' + getHourOfDate(event.endingdate);
 
-                    createTxtOfEvent += ' : ' + event.title;
-                    createTxtOfEvent += '. Type d\'activité : ' + event.category
+            createTxtOfEvent += ' : ' + event.title;
+            createTxtOfEvent += '. Type d\'activité : ' + event.category
 
-                    event_tag.innerHTML = createTxtOfEvent;
-                }
-            }
-        })
-        
+            event_tag.innerHTML = createTxtOfEvent;
+        }
     }
 }
 function getHourOfDate(date) {
@@ -62,7 +63,7 @@ function getMonday(d) {
         diff = d.getDate() - day;
     return new Date(d.setDate(diff));
 }
-  
+
 function getSunday(d) {
     d = new Date(d);
     let day = d.getDay(),
