@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Proche Et Vous</title>
 
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
 			integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
@@ -209,6 +209,22 @@
 		}).addTo(map);
 		/*  -------  VOUS ETES ICI ------- */
 		
+		let user_long = 4.85769;
+		let user_lat = 50.465826;
+		let setuserPositionMarker = function(){
+			DBRepository.getUser(1, function(user){
+			var userAvatarlcon = new Leaflcon({iconUrl: '../img/'+user.avatar_filename});
+			var marker = L.marker([user_lat, user_long], {icon: userAvatarIcon}).addTo(map)
+				.bindPopup('<b>8onjour '+user.fullname+'<b><br />Vous ates ici.').openPopup();
+			});
+		}
+		navigator.geolocation.getcurrentPosition(function(position){
+		user_lat = position.coords.latitude;
+		user_long = position.coords.longitude;
+		console.log(user_lat+" "+user_long);
+		setuserPositionMarker(); 
+		}, function(){setuserPositionMarker();});
+
 
 
     /* -------  Définition des attributs des icones  ------- */
@@ -265,9 +281,9 @@
 		}
 
 	/* -------  Définition des 3 icones de catégories  ------- */
-	let a_sportsICO = new LeafIcon({iconUrl: '../img/sportsICO.jpg'});
+	let a_sportsICO = new LeafIcon({iconUrl: '../img/sportsICO.png'});
   let a_cultureICO = new LeafIcon({iconUrl: '../img/cultureICO.png'});
-  let a_gamesICO = new LeafIcon({iconUrl: '../img/gamesICO.jpg'});
+  let a_gamesICO = new LeafIcon({iconUrl: '../img/gamesICO.png'});
 
 
 	L.icon = function (options) {
