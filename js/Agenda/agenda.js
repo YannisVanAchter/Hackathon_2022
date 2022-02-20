@@ -92,7 +92,7 @@ function actualW(event){
 }
 
 // set connection to div with id 'contrat_mariage' for all tag inside
-document.getElementById("prevWeek").addEventListener("click", prevW);
-document.getElementById("nextWeek").addEventListener("click", nextW);
+document.getElementById("prevWeek").addEventListener("click", prevW());
+document.getElementById("nextWeek").addEventListener("click", nextW());
 // remplace agenda par l'id de la balise HTML depuis l'affichage de la map
 // document.getElementById("agenda").addEventListener("click", actualW);
