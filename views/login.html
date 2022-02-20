@@ -2,184 +2,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<title>Proche et vous - Page de connexion</title>
-	
-	<meta charset="UTF-8">
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<!-- Intégration BOOTSTRAP -->
-	
-	<!-- Latest compiled and minified CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	<!-- Latest compiled JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	
-	<!-- CSS Whovians CSS -->
-	<link href="../styles/homePageStyles.css" rel="stylesheet">
-		<style>
-		body {font-family: Roboto, sans-serif; font-size: 22px; color: black;}
-		form {border: 4px solid #green;}
-		
-		/* -------------   Titre   -------- */
-
-		.titre {
-			text-align: center;
-			padding: 20px 20px;
-			margin: 8px 0;
-			font-size: 30px;
-		}
-
-		/*  ------------- Champs Email + Password   ------ */
-		input[type=email], input[type=password] {
-		  width: 60%;
-		  
-		  padding: 12px 20px;
-		  margin: 8px 0;
-		  display: inline-block ;
-		  border: 1px solid #ccc;
-		  box-sizing: border-box;
-		}
-
-		button {
-			background-color: #04AA6D;
-			padding: 8px 2px;
-			margin: 4px 0;
-			border: none;
-			cursor: pointer;
-			width: 50%;
-			border-radius: 50%;
-		}
-
-		button:hover {
-		  opacity: 0.8;
-		  border-radius: 25%;
-		  width: 70%;
-		}
-
-		.container {
-			text-align: center;
-			padding: 8Spx;
-		  
-		}
-		
-		a:link {
-			text-decoration: none;
-		}
-		
-		.rstpwd {
-		  width: auto;
-		  padding: 5px 5px;
-		  background-color: #f44336;
-		  float: right;
-		  padding-top: 16px;
-		  font-size: 18px;
-		  border-radius: 15px;
-		}
-
-
-		/* Change styles for span and cancel button on extra small screens */
-		@media screen and (max-width: 300px) {
-			span.psw {
-			 display: block;
-			 float: none;
-			}
-			.imgcontainer {
-				height: 10%;
-				}
-			}
-
-			
-		</style>
-	</head>
-<body>
-<!-- **********   TITLE/LOGO BANNER **********  -->	
-	<header class="header"	>
-		<div class="imgcontainer">
-			<img src="../img/logo_squared.png" alt="Logo" class="logo">
-		</div>
-	</header>
-
-	<div class="titre">
-		Connectez-vous
-	</div>
-<!-- **********   AVATAR **********  -->
-	<div class="imgcontainer">
-		<img src="../img/avatar.png" alt="Photo de profil" class="avatar">
-	</div>
-<!-- **********   LOGIN FIELDS **********  -->
-	<form action="/action_page.php" method="post">
-		<div class="container">
-			<label for="email"><b>Entrez votre adresse e-mail : </b></label><br />
-				<input type="email" placeholder="exemple@gmail.com" name="email" required><br />
-			<label for="psw"><b>Entrez votre mot de passe : </b></label><br />
-				<input type="password" placeholder="Votre mot de passe" name="psw" required><br />
-			<button type="submit" ><a href="main.html">Connexion</a></button><br />
-			<label>
-			  <input type="checkbox" checked="checked" name="remember"> Me garder connecté
-			</label>
-		</div>
-
-		  <div class="container" style="background-color:#f1f1f1">
-			<!--
-			<button type="button" class="cancelbtn">Cancel</button>
-			-->
-			<button type="button" class="rstpwd">
-			Oubli de votre mot de passe ?
-			</button>
-
-		  </div>
-	</form>
-<!-- --------------------------  FOOTER   -------------------------- -->
-<div class="mt-5 p-4 bg-dark text-center">
-  	<div class="row">
-		<div class="col-sm p-4 bg-primary">
-			<div class="trow">
-				Contact			
-			</div>
-			<div class="row">
-				<div class="col-sm p-3 bg-primary">
-					Téléphone
-					<br />
-					01/234.56.78
-				</div>
-				<div class="col-sm p-3 bg-primary">
-					Siège social
-					<br />
-					Rue de l'espoir 1, 5000 Namur
-				</div>		
-			</div>
-		</div>
-		<div class="col-sm p-5 bg-primary text-white">
-			<div class="row">
-				<div class="col-sm p-3 bg-primary">
-					<button type="button" class="simplebutton">
-						Sitemap
-					</button>
-				</div>
-				<div class="col-sm p-3 bg-primary text-white">
-					<button type="button" class="simplebutton">
-						Conditions d'utilisations
-					</button>
-				</div>
-				<div class="col-sm p-3 bg-primary text-white">
-					<button type="button" class="simplebutton">
-						Politique de vie privée
-					</button>
-				</div>		
-			</div>
-		</div>
-	</div>
-	<div class="trow">
-		The Whovians copyright 2022
-	</div>
-</div>
-</body>
-</html>
-=======
-<!DOCTYPE html>
-<html lang="fr">
-<head>
 	<title>Proche et vous</title>
 	
 	<meta charset="UTF-8">
@@ -197,7 +19,7 @@
 
 		<style>
 		body {font-family: Roboto, sans-serif; font-size: 22px;}
-		form {border: 4px solid #green;}
+		form {border: 4px solid green;}
 
 		/* -------------   Header et logo   -------- */
 
@@ -326,7 +148,6 @@
 	</head>
 <body>
 
-	<form action="/action_page.php" method="post">
 
 <!-- **********   TITLE/LOGO BANNER **********  -->	
 
@@ -347,16 +168,17 @@
 
 <!-- **********   LOGIN FIELDS **********  -->
 
-	<div class="container">
-		<label for="email"><b>Entrez votre adresse e-mail : </b></label><br />
-			<input type="email" placeholder="exemple@gmail.com" name="email" required><br />
-		<label for="psw"><b>Entrez votre mot de passe : </b></label><br />
-			<input type="password" placeholder="Votre mot de passe" name="psw" required><br />
-		<button type="submit" ><a href="main.html">Connexion</a></button><br />
-		<label>
-		  <input type="checkbox" checked="checked" name="remember"> Me garder connecté
-		</label>
-	</div>
+  <form id="login_form">
+	  <div class="container">
+	  	<label for="email"><b>Entrez votre adresse e-mail : </b></label><br />
+	  		<input type="email" placeholder="exemple@gmail.com" name="email" required><br />
+	  	<label for="psw"><b>Entrez votre mot de passe : </b></label><br />
+	  		<input type="password" placeholder="Votre mot de passe" name="psw" required><br />
+	  	<button type="submit" id="login_button"><a href="main.html">Connexion</a></button><br />
+	  	<label>
+	  	  <input type="checkbox" checked="checked" name="remember"> Me garder connecté
+	  	</label>
+	  </div>
 
 	  <div class="container" style="background-color:#f1f1f1">
 		<!--
@@ -368,6 +190,37 @@
 
 	  </div>
 	</form>
+  <script src="../js/Adapters/DBRepository.js">
+    function processLoginForm(e) {
+      console.log("ewo");
+      sessionStorage.setItem("lastname", "Smith");
+      if (e.preventDefault) e.preventDefault();
+
+      let email = document.getElementById("login_form").elements["email"];
+      let pwd = document.getElementById("login_form").elements["pwd"];
+
+      console.log(email);
+      console.log(pwd);
+      DBRepository.doesLoginExist(email, function(doesExist, founduser){
+        console.log(doesExist);
+        window.sessionStorage.setItem("user_id", founduser.user_id);
+        window.location.href = "./main.html";
+        //redirect
+      });
+
+
+
+      // You must return false to prevent the default form behavior
+      return false;
+    }
+
+    var form = document.getElementById('login_form');
+    if (form.attachEvent) {
+        form.attachEvent("submit", processLoginForm);
+    } else {
+        form.addEventListener("submit", processLoginForm);
+    }
+  </script>
 <!-- --------------------------  FOOTER   -------------------------- -->
 <div class="mt-5 p-4 bg-dark text-white text-center">
   	<div class="row">
@@ -412,6 +265,6 @@
 		The Whovians copyright 2022
 	</div>
 </div>
+
 </body>
 </html>
->>>>>>> 0bdddfaa16cf90020202befe7d396d07edbcd3d6

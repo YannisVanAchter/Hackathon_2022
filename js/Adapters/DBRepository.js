@@ -45,7 +45,7 @@ class DBRepository{
 
   static seedUsers(callback){
     const user_data = [
-      {user_id:1,  fullname:"Marie Antoinette", email:"m.antoinette@gmail.com", password:"thisisatest", avatar_filename:"avatar.png"},
+      {user_id:1,  fullname:"Marie Antoinette", email:"m.antoinette@gmail.com", password:"thisisatest", avatar_filename:"granny-round.png"},
       {user_id:2,  fullname:"Wolf Dancy", email:"wdancy0@guardian.co.uk", password:"thisisatest", avatar_filename:"avatar.png"},
       {user_id:3,  fullname:"Hernando Lloyds", email:"hlloyds1@cnn.com", password:"thisisatest", avatar_filename:"avatar.png"},
       {user_id:4,  fullname:"Chrystel Phipard-Shears", email:"cphipardshears2@moonfruit.com", password:"thisisatest", avatar_filename:"avatar.png"},
@@ -291,7 +291,7 @@ class DBRepository{
       objectStoreRequest.onsuccess = function(event) {
         // report the success of our request
         //console.log("success objectsotre");
-        callback(true);
+        callback(true, event.target.result);
         db.close();
       };
       objectStoreRequest.onerror = function(event){

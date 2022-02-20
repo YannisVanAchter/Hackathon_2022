@@ -3,8 +3,8 @@
 <html lang="en">
 <head>
 	
-	<title>Proche et vous - Carte</title>
-
+	<title>Proches Et Vous !</title>
+  <script src="../js/Adapters/DBRepository.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
@@ -74,6 +74,20 @@
 </head>
 <body>
 
+	<nav class="navbar bg-navbar">
+		<div class="container">
+			<div class="navbar-header">
+			  <a class="navbar-brand" href="#">
+				  <img src="../img/logo_squared.png" width="70" height="70" alt="">
+			  </a>
+			</div>
+			<nav class="navbar navbar-expand-sm justify-content-right">
+				<button class="btn navbar-btn">CREER UN EVENEMENT</button>
+				<button class="btn navbar-btn">MON COMPTE</button>
+			</nav>
+			
+		  </div>
+	</nav>
 
 <div style="margin-left:80%;padding:2px 2px;height:100px;">
 <ul>
@@ -111,8 +125,24 @@
 		
 	/*  -------  VOUS ETES ICI ------- */
 
-		var marker = L.marker([50.465826, 4.85769]).addTo(map)
-			.bindPopup('<b>Bonjour $name</b><br />Vous êtes ici.').openPopup();
+  let user_long = 4.85769;
+  let user_lat = 50.465826;
+  let setUserPositionMarker = function(){
+    DBRepository.getUser(1, function(user){
+      var userAvatarIcon = new LeafIcon({iconUrl: '../img/'+user.avatar_filename});
+      var marker = L.marker([user_lat, user_long], {icon: userAvatarIcon}).addTo(map)
+			  .bindPopup('<b>Bonjour '+user.fullname+'</b><br />Vous êtes ici.').openPopup();
+    });
+  }
+    navigator.geolocation.getCurrentPosition(function(position){
+        user_lat  = position.coords.latitude;
+        user_long = position.coords.longitude;
+        console.log(user_lat+" "+user_long);
+        setUserPositionMarker();
+      }, function(){
+        setUserPositionMarker();
+      });
+
 
 	/* -------  Définition des attributs des icones  ------- */
 		var LeafIcon = L.Icon.extend({
@@ -137,9 +167,19 @@
 	};
 	
 	/*  -------  Positionnement d'icones d'activités ==> Dévelloper une fonction qui parcoure la DB ------- */
-	L.marker([50.467386, 4.857674], {icon: sportsICO}).addTo(map).bindPopup("Activité sportive.");
-	L.marker([50.465405, 4.862437], {icon: cultureICO}).addTo(map).bindPopup("Activité culturelle.");
-	L.marker([50.46369, 4.859101], {icon: gamesICO}).addTo(map).bindPopup("Activité récréative.");
+  DBRepository.getParticipations(1, function(participations){
+    participations.forEach(participation => {
+      DBRepository.getEvent(participation.event_id, function(event_item){
+        let event_icon = cultureICO;
+        if(event_item.category_type === "Sport") {
+          event_icon = sportsICO;
+        } else if(event_item.category_type === "Jeux") {
+          event_icon = gamesICO;
+        }
+        L.marker([50.467386, 4.857674], {icon: spevent_iconortsICO}).addTo(map).bindPopup(event_item.title);
+      });
+    });
+  });
 
 
 	/*  -------  Choix des catégories ------- */
