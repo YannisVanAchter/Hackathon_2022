@@ -1,20 +1,8 @@
 
-const weeks = [
-    "Dimanche",
-    "Lundi",
-    "Mardi",
-    "Mercredi",
-    "Jeudi",
-    "Vendredi",
-    "Samedi"
-];
-
-const today = new Date();
-
 // function actived to write the days of the week
 function writeWeek(date){
     // initialisation des ressources mémoire
-    let semaine_tag = document.querySelector('.semaine')
+    let semaine_tag = document.querySelector('.semaine') // ne pas oublier le point car c'est une class dans l'HTML
     let actualDate = new Date(date)
     let monday = getMonday(actualDate)
     let sunday = getSunday(monday)
@@ -54,12 +42,6 @@ function getSunday(d) {
         diff = d.getDate() - day + 6;
     return new Date(d.setDate(diff));
 }
-
-// let headCalendar = "Semaine du " + getMonday(current) + " au " + getSunday(current);
-
-// let weekCalendar = {
-    
-// }
 
 function prevW(event) {
     // preventDefault() = 
