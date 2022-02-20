@@ -101,7 +101,7 @@
 
 </head>
 <body>
-	<nav class="navbar bg-navbar" style="background-color:#707070;">
+	<nav class="navbar bg-navbar" style="background-color:#ccffcc;">
 		<div class="container">
 			<div class="navbar-header">
 			  <a class="navbar-brand" href="#">
@@ -317,6 +317,18 @@
 
     }
     function refreshAgenda(){
+
+      let today = new Date().getDay();
+      switch(eventdate_day){
+        case 4: agendapositionelement = document.getElementById("agenda_dimanche"); break;
+        case 5: agendapositionelement = document.getElementById("agenda_lundi"); break;
+        case 6: agendapositionelement = document.getElementById("agenda_mardi"); break;
+        case 0: agendapositionelement = document.getElementById("agenda_mercredi"); break;
+        case 1: agendapositionelement = document.getElementById("agenda_jeudi"); break;
+        case 2: agendapositionelement = document.getElementById("agenda_vendredi"); break;
+        case 3: agendapositionelement = document.getElementById("agenda_samedi"); break;
+      }
+
       document.getElementById("agenda_dimanche").innerHTML="";
       document.getElementById("agenda_lundi").innerHTML="";
       document.getElementById("agenda_mardi").innerHTML="";
