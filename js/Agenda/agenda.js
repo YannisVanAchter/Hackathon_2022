@@ -10,7 +10,7 @@ function writeWeek(date){
     // met à jour l'entête de l'agenda (bleu)
     mondayTxt = ((monday.getDate() +1) + '/' + (monday.getMonth() + 1) );
     sundayTxt = ((sunday.getDate() + 1) + '/' + (sunday.getMonth() +1 ));
-    console.log(mondayTxt + ' - ' + sundayTxt);
+    // console.log(mondayTxt + ' - ' + sundayTxt);
     semaine_tag.innerHTML = (mondayTxt + ' - ' + sundayTxt);
 
 
@@ -22,11 +22,38 @@ function writeWeek(date){
             day_tag.classList.add('current-date');
         }
 
-        // ajout des evènements
+        // ajout des evènements sur l'affichage
         const event_tag = document.querySelector(".a_"+i)
         // faire vérifier la db avec Lenaïc
-        // event_tag.innerHTML = EventParticipation()
+        DBRepository.getParticipations(1,function (activityUser){
+            let eventListID = [];
+            for (id in activityUser){
+                eventListID.push(id.event_id)
+            }
+            let dateToCheck = new Date(monday.getDay + (i-1))
+            for (activity_id in eventListID){
+                let event = DBRepository.getEvent(activity_id);
+                let createTxtOfEvent = "";
+
+                let dateEventBegin = getHourOfDate(event.begindate);
+                if (dateEventBegin === dateToCheck) {
+                    createTxtOfEvent += dateEventBegin;
+                    createTxtOfEvent += '-' + getHourOfDate(event.endDate);
+
+                    createTxtOfEvent += ' : ' + event.title;
+                    createTxtOfEvent += '. Type d\'activité : ' + event.category
+
+                    event_tag.innerHTML = createTxtOfEvent;
+                }
+            }
+        })
+        
     }
+}
+function getHourOfDate(date) {
+    let hour = date.getHours()
+    let minutes = date.getMinutes()
+    return "" + hour + "h" + minutes + "min"
 }
 
 function getMonday(d) {
@@ -43,8 +70,7 @@ function getSunday(d) {
     return new Date(d.setDate(diff));
 }
 
-function prevW(event) {
-    // preventDefault() = 
+function prevW(event) { 
     event.preventDefault();
     let date = new Date();
     date.setDate()-= 7;
@@ -67,5 +93,5 @@ function actualW(event){
 // set connection to div with id 'contrat_mariage' for all tag inside
 document.getElementById("prevWeek").addEventListener("click", prevW);
 document.getElementById("nextWeek").addEventListener("click", nextW);
-// remplace BALISE par la balise HTML depuis l'affichage de la map
-// document.getElementById(BALISE).addEventListener("click", actualW);
+// remplace agenda par l'id de la balise HTML depuis l'affichage de la map
+// document.getElementById("agenda").addEventListener("click", actualW);
